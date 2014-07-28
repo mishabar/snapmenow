@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SMN.Services.Tokens.ProductToken>
+@{
+    ViewBag.Title = " Current Sales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 active-sale">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="sale-title">@item.Name</td>
+                                <td class="sale-end-date">@item.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="position: relative;">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <img src="@item.Images[0]" class="img-responsive" />
+                                        <a class="btn btn-lg btn-warning btn-snapme" href="@Url.Action("Details", new { id = item.ID })">Snap Me Now @@ @string.Format("{0:c}", item.CurrentSale.CurrentPrice / 100)<i class="ti-angle-right"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hidden-xs more-images">
+                                <td>
+                                    <div class="row">
+                                        @for (int i = 1; i < Math.Min(5, item.Images.Length); i++)
+                                        {
+                                            <div class="col-sm-3">
+                                                <div class="img-thumbnail" style="background-image: url(@item.Images[i])"></div>
+                                            </div>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    }
+</div>

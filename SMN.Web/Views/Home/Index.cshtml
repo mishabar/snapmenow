@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+}
+
+<div class="row landing-page">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+    </div>
+</div>
+<p></p>
+<div class="row how-it-works">
+    <div class="col-xs-12 text-center">
+        <div>
+            <h3><span>How Does It Work?</span></h3>
+            <hr />
+        </div>
+        <div class="video">
+            <iframe width="640" height="360" src="//www.youtube.com/embed/0vrdgDdPApQ" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+<div class="row get-started">
+    <div class="col-xs-12 text-center">
+        <a class="btn btn-lg btn-success" id="registerLink" href="@Url.Action("Register", "Account", routeValues: null)">Get Started Now <i class="ti-angle-right"></i></a>
+    </div>
+</div>
+<div class="clearfix"></div>

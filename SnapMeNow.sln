@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMN.Web", "SMN.Web\SMN.Web.csproj", "{C879216B-6E2D-4AD8-B24D-C9D3469B999C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB.AspNet.Identity", "MongoDB.AspNet.Identity\MongoDB.AspNet.Identity.csproj", "{A3716FFB-E66A-4A54-BF9B-32D20DD4D0DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMN.Data", "SMN.Data\SMN.Data.csproj", "{46ECC1D7-5A86-4B7C-92DC-94F6879C3707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMN.Services", "SMN.Services\SMN.Services.csproj", "{DA6A364F-60A8-43FF-93D0-6ECE15CA00F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMN.Data.Repositories", "SMN.Data.Repositories\SMN.Data.Repositories.csproj", "{A3E7B8C6-0F4E-41AC-B91F-9D3483C9B571}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C879216B-6E2D-4AD8-B24D-C9D3469B999C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C879216B-6E2D-4AD8-B24D-C9D3469B999C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C879216B-6E2D-4AD8-B24D-C9D3469B999C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C879216B-6E2D-4AD8-B24D-C9D3469B999C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3716FFB-E66A-4A54-BF9B-32D20DD4D0DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3716FFB-E66A-4A54-BF9B-32D20DD4D0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3716FFB-E66A-4A54-BF9B-32D20DD4D0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3716FFB-E66A-4A54-BF9B-32D20DD4D0DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46ECC1D7-5A86-4B7C-92DC-94F6879C3707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46ECC1D7-5A86-4B7C-92DC-94F6879C3707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46ECC1D7-5A86-4B7C-92DC-94F6879C3707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46ECC1D7-5A86-4B7C-92DC-94F6879C3707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA6A364F-60A8-43FF-93D0-6ECE15CA00F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA6A364F-60A8-43FF-93D0-6ECE15CA00F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA6A364F-60A8-43FF-93D0-6ECE15CA00F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA6A364F-60A8-43FF-93D0-6ECE15CA00F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E7B8C6-0F4E-41AC-B91F-9D3483C9B571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E7B8C6-0F4E-41AC-B91F-9D3483C9B571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E7B8C6-0F4E-41AC-B91F-9D3483C9B571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E7B8C6-0F4E-41AC-B91F-9D3483C9B571}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

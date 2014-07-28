@@ -1,0 +1,78 @@
+﻿@model SMN.Services.Tokens.ProductToken
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section fullwidth_top
+{
+    <div class="toolbar">
+        <div class="container">
+            <a href="@Url.Action("Index", "Sales")"><i class="ti-angle-left"></i> Back to Sales List</a>
+        </div>
+    </div>
+}
+
+<div class="row sale-details">
+    <div class="col-md-4">
+        <h2>@Model.Name</h2>
+        <div class="msrp">
+            MSRP: @string.Format("{0:c}", Model.MSRP / 100)
+            <div class="discount pull-right">@Math.Round((1 - (double)Model.CurrentSale.CurrentPrice / (double)Model.MSRP) * 100, 0)%</div>
+        </div>
+        <p>
+            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-bolt"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice / 100)</a>
+        </p>
+    </div>
+    <div class="col-md-8">
+        <div class="embed-responsive embed-responsive-16by9">
+            <div class="img-thumbnail">
+                <div id="images-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < Model.Images.Length; i++)
+                    {
+                            <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                    }
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Model.Images.Length; i++)
+                    {
+                            <div class="item @(i == 0 ? "active" : "")">
+                                <img src="@Model.Images[i]" />
+                            </div>
+                    }
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="more-images row">
+            @foreach (var item in Model.Images)
+            {
+                <div class="col-sm-2">
+                    <div class="img-thumbnail" style="background-image: url(@item)"></div>
+                </div>
+            }
+        </div>
+        <div class="description row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Description</strong></div>
+                    <div class="panel-body">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

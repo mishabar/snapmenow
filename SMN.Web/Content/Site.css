@@ -1,0 +1,232 @@
+﻿html, body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+}
+
+.body-content {
+    padding-bottom: 150px;
+}
+
+footer {
+    background-color: #5BCF6C;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 140px;
+    color: #FFF;
+}
+
+.navbar {
+    margin-bottom: 10px;
+}
+
+.navbar-brand, .navbar-brand:hover, .footer-brand {
+    font-family: 'Fira Sans';
+    font-weight: bold;
+    font-size: 2em;
+    font-style: italic;
+    color: #666;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #666;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #FFF;
+}
+
+.panel-default, .img-thumbnail {
+    border-radius: 0px;
+}
+
+.footer-brand {
+    color: #FFF;
+}
+
+footer a, footer a:hover {
+    color: #FFF;
+}
+
+footer .container > .row {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+footer .social-networks::after {
+    content: '';
+    display: table;
+}
+
+footer .social-networks a {
+    border-radius: 4px;
+    background-color: #FFF;
+    color: #5BCF6C;
+    padding: 2px 5px;
+    font-size: 18px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+ul.nav.navbar-nav a {
+    color: #666;
+}
+
+.landing-page h2 {
+    text-align: center;
+}
+
+.how-it-works {
+    margin-bottom: 30px;
+}
+
+    .how-it-works span {
+        background-color: #FFF;
+        padding: 10px;
+    }
+
+    .how-it-works hr {
+        margin-top: -22px;
+    }
+
+    .how-it-works .video {
+        margin-top: 40px;
+    }
+
+.get-started {
+    margin: 20px auto;
+}
+
+    .get-started .btn-lg {
+        font-size: 2em;
+        border-radius: 0px;
+    }
+
+#productForm div.img-responsive.img-thumbnail {
+    height: 80px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.text-danger.field-validation-error {
+    font-size: smaller;
+}
+
+.active-sale .table > tbody > tr > td {
+    border-top: none;
+}
+
+td.sale-title {
+    font-weight: bold;
+}
+
+td.sale-end-date {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.active-sale .table {
+    margin-bottom: 0px;
+}
+
+.active-sale .panel-default:hover {
+    box-shadow: 1px 1px 1px #aaa, -1px -1px 1px #aaa;
+}
+
+.active-sale .btn.btn-warning.btn-snapme {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    border-radius: 6px 0 0 6px;
+    color: #000;
+    border-color: #FFF;
+    background-color: #FDE40D;
+}
+
+.active-sale .more-images .img-thumbnail, .sale-details .more-images .img-thumbnail {
+    height: 86px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    border-color: transparent;
+}
+
+.active-sale .more-images .col-sm-4 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.sale-details .msrp {
+    font-size: 1.5em;
+    line-height: 2em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+    .sale-details .msrp .discount {
+        font-size: 2em;
+        font-weight: bold;
+        color: #5CB85C;
+    }
+
+.sale-details .btn-snapme {
+    font-size: 1.5em;
+    border-radius: 0px;
+}
+
+.sale-details .carousel-indicators {
+    right: 30px;
+    left: auto;
+    text-align: right;
+}
+
+    .sale-details .carousel-indicators li {
+        background-color: #e3e3e3;
+        border-width: 3px;
+    }
+
+        .sale-details .carousel-indicators li.active {
+            background-color: #50B650;
+            border-width: 3px;
+        }
+
+.sale-details .carousel-control.left, .sale-details .carousel-control.right {
+    background: none;
+}
+
+.sale-details .carousel {
+    
+}
+
+.sale-details .carousel-inner img {
+    margin: 0px auto;
+}
+
+.sale-details .more-images {
+    margin: 20px 0px;
+}
+
+    .sale-details .more-images div.img-thumbnail {
+        opacity: 0.5;
+    }
+
+        .sale-details .more-images div.img-thumbnail:hover {
+            opacity: 1;
+        }
+
+.toolbar {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+    .toolbar a {
+        color: #666;
+    }
