@@ -11,5 +11,6 @@ namespace SMN.Data
         public string ID { get; set; }
         public int CurrentPrice { get; set; }
         public DateTime EndsAt { get; set; }
+        public int Snaps { get; set; }
     }
 }

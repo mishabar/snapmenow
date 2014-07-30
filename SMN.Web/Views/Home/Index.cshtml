@@ -2,22 +2,33 @@
     ViewBag.Title = "Welcome";
 }
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="top-banner embed-responsive">
+            <div class="embed-responsive-item">
+                <div style=" padding: 50px 0 0 50px">
+                    <h2>24 Hour Sales!</h2>
+                    <h2>Huge Savings! Snap Yours Now!</h2>
+                    <p style="margin-top: 20px;">
+                        <a class="btn btn-lg btn-success" id="registerLink" href="@Url.Action("Register", "Account", routeValues: null)">Get Started Now <i class="ti-angle-right"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row landing-page">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
+        <h2>Browse</h2>
+        <p class="text-center">Browse the list of our <a href="@Url.Action("Index", "Sales")">active sales</a> and entera sale of a product that you want.</p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <h2>Snap and Share</h2>
+        <p class="text-center">Hit Snap to reserve it at the current price and wait for the sale to end. Or Share with your friends and pay even less.</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <h2>Pay Less</h2>
+        <p class="text-center">Get an email with the final price once the sale is over and proceed with the checkout.</p>
     </div>
 </div>
 <p></p>
@@ -29,6 +40,9 @@
         </div>
         <div class="video">
             <iframe width="640" height="360" src="//www.youtube.com/embed/0vrdgDdPApQ" frameborder="0" allowfullscreen></iframe>
+            <h3 class="text-center">
+                <a href="@Url.Action("FAQ", "Home")">Still have questions?</a>
+            </h3>
         </div>
     </div>
 </div>

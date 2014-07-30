@@ -8,6 +8,7 @@ namespace SMN.Web.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string Name { get; set; }
     }
 
     public class ExternalLoginListViewModel

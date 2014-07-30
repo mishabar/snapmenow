@@ -11,6 +11,7 @@ using SMN.Web.Models;
 using MongoDB.Driver;
 using System.Configuration;
 using SMN.Web.App_Start;
+using Microsoft.Owin.Security.Facebook;
 
 namespace SMN.Web
 {
@@ -49,9 +50,13 @@ namespace SMN.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            var fbOptions = new FacebookAuthenticationOptions
+            {
+                AppId = "472333879576868",
+                AppSecret = "5bdbe4876747ec03fa85a807cd632c1d"
+            };
+            fbOptions.Scope.Add("email");
+            app.UseFacebookAuthentication(fbOptions);
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

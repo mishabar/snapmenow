@@ -8,6 +8,10 @@
     padding-bottom: 150px;
 }
 
+.btn, .panel-group .panel {
+    border-radius: 0px;
+}
+
 footer {
     background-color: #5BCF6C;
     width: 100%;
@@ -77,6 +81,19 @@ ul.nav.navbar-nav a {
 .landing-page h2 {
     text-align: center;
 }
+
+.top-banner {
+    background: transparent url(/Content/Images/home.png) no-repeat top right;
+    background-size: contain;
+    padding-bottom: 33.75%;
+}
+
+    .top-banner h2 {
+        font-family: 'Fira Sans';
+        font-weight: bold;
+        font-style: italic;
+        font-size: 2em;
+    }
 
 .how-it-works {
     margin-bottom: 30px;
@@ -162,14 +179,14 @@ td.sale-end-date {
 }
 
 .sale-details .msrp {
-    font-size: 1.5em;
+    font-size: 1em;
     line-height: 2em;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
     .sale-details .msrp .discount {
-        font-size: 2em;
+        font-size: 1.8em;
         font-weight: bold;
         color: #5CB85C;
     }
@@ -200,7 +217,7 @@ td.sale-end-date {
 }
 
 .sale-details .carousel {
-    
+    height: 100%;
 }
 
 .sale-details .carousel-inner img {
@@ -230,3 +247,14 @@ td.sale-end-date {
     .toolbar a {
         color: #666;
     }
+
+.btn-facebook, .btn-facebook:hover {
+    background-color: #4E69A2;
+    border-color: #435A8B #3C5488 #334C83;
+    color: #FFF;
+}
+
+#externalLogins .table > tbody > tr > td {
+    border-top: none;
+    vertical-align: middle;
+}

@@ -22,11 +22,11 @@ namespace SMN.Services.Tokens
         public string[] Images { get; set; }
         [Required]
         [Range(0, 10000)]
-        public int MSRP { get; set; }
+        public float MSRP { get; set; }
         [Required]
         [Range(0, 10000)]
         [Display(Name = "Minimum Price")]
-        public int MinPrice { get; set; }
+        public float MinPrice { get; set; }
         [Required]
         [Range(0, 10000)]
         [Display(Name = "Items Available")]
@@ -47,14 +47,15 @@ namespace SMN.Services.Tokens
                 Name = product.Name,
                 Description = product.Description,
                 Images = product.Images,
-                MSRP = product.MSRP,
-                MinPrice = product.MinPrice,
+                MSRP = (float)product.MSRP / (float)100,
+                MinPrice = (float)product.MinPrice / (float)100,
                 ItemsAvailable = product.ItemsAvailable,
                 CurrentSale = product.CurrentSale == null ? null : new SaleToken 
                 {
-                    CurrentPrice = product.CurrentSale.CurrentPrice,
-                    Discount = (1 - (product.MSRP / product.CurrentSale.CurrentPrice)) * 100,
-                    EndsAt = product.CurrentSale.EndsAt
+                    CurrentPrice = (float)product.CurrentSale.CurrentPrice / (float)100,
+                    Discount = (1 - ((float)product.CurrentSale.CurrentPrice / (float)product.MSRP)) * 100,
+                    EndsAt = product.CurrentSale.EndsAt,
+                    Snaps = product.CurrentSale.Snaps
                 }
             };
         }
@@ -69,8 +70,8 @@ namespace SMN.Services.Tokens
                 Name = token.Name,
                 Description = token.Description,
                 Images = token.Images,
-                MSRP = token.MSRP,
-                MinPrice = token.MinPrice,
+                MSRP = (int)(token.MSRP * 100),
+                MinPrice = (int)(token.MinPrice * 100),
                 ItemsAvailable = token.ItemsAvailable
             };
         }

@@ -14,36 +14,26 @@
 }
 
 <div class="row sale-details">
-    <div class="col-md-4">
-        <h2>@Model.Name</h2>
-        <div class="msrp">
-            MSRP: @string.Format("{0:c}", Model.MSRP / 100)
-            <div class="discount pull-right">@Math.Round((1 - (double)Model.CurrentSale.CurrentPrice / (double)Model.MSRP) * 100, 0)%</div>
-        </div>
-        <p>
-            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-bolt"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice / 100)</a>
-        </p>
-    </div>
     <div class="col-md-8">
         <div class="embed-responsive embed-responsive-16by9">
-            <div class="img-thumbnail">
+            <div class="embed-responsive-item" style="border: 1px solid #DDD;overflow: hidden;max-height: 100%;">
                 <div id="images-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         @for (int i = 0; i < Model.Images.Length; i++)
-                    {
+                        {
                             <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
-                    }
+                        }
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         @for (int i = 0; i < Model.Images.Length; i++)
-                    {
+                        {
                             <div class="item @(i == 0 ? "active" : "")">
                                 <img src="@Model.Images[i]" />
                             </div>
-                    }
+                        }
                     </div>
 
                     <!-- Controls -->
@@ -74,5 +64,30 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-4">
+        <h2>@Model.Name</h2>
+        <div class="msrp">
+            Retail Price: <span style="text-decoration: line-through">@string.Format("{0:c}", Model.MSRP)</span>
+            <div class="discount">Current Discount: @Math.Round(Model.CurrentSale.Discount, 2)%</div>
+        </div>
+        <p>
+            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-bolt"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice)</a>
+        </p>
+        @if (Model.CurrentSale.Snaps == 0)
+        {
+            <p class="text-center">
+                No Snaps yet. Be the first to Snap and get additional 5% discount at Checkout!
+            </p>
+        }
+        else
+        { 
+            <p class="text-center">
+                @Model.CurrentSale.Snaps @(Model.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
+            </p>
+        }
+        <p>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="box-count" data-width="100px;"></div>
+        </p>
     </div>
 </div>

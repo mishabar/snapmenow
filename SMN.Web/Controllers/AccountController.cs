@@ -353,7 +353,7 @@ namespace SMN.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, Name = loginInfo.ExternalIdentity.Name });
             }
         }
 
@@ -404,25 +404,52 @@ namespace SMN.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-                IdentityResult result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
+                var user = UserManager.FindByEmail(model.Email);
+                IdentityResult result = null;
+
+                if (user != null)
                 {
+                    if (!string.IsNullOrWhiteSpace(model.Name) && user.UserName == user.Email)
+                    {
+                        user.UserName = model.Name;
+                        UserManager.Update(user);
+                    }
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
-                AddErrors(result);
+                else
+                {
+                    user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                    result = await UserManager.CreateAsync(user);
+                    if (result.Succeeded || (user != null && !string.IsNullOrWhiteSpace(user.Id)))
+                    {
+                        result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                        if (result.Succeeded)
+                        {
+                            await SignInAsync(user, isPersistent: false);
+
+                            // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
+
+                            return RedirectToLocal(returnUrl);
+                        }
+                    }
+                    AddErrors(result);
+                }
             }
 
             ViewBag.ReturnUrl = returnUrl;

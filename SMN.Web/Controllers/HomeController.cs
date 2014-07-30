@@ -28,5 +28,10 @@ namespace SMN.Web.Controllers
 
             return View();
         }
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
     }
 }
