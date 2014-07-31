@@ -68,11 +68,12 @@
     <div class="col-md-4">
         <h2>@Model.Name</h2>
         <div class="msrp">
-            Retail Price: <span style="text-decoration: line-through">@string.Format("{0:c}", Model.MSRP)</span>
+            <div>Ends At: <strong>@Model.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
+            <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.MSRP)</span></div>
             <div class="discount">Current Discount: @Math.Round(Model.CurrentSale.Discount, 2)%</div>
         </div>
         <p>
-            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-bolt"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice)</a>
+            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice)</a>
         </p>
         @if (Model.CurrentSale.Snaps == 0)
         {
@@ -86,8 +87,8 @@
                 @Model.CurrentSale.Snaps @(Model.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
             </p>
         }
-        <p>
-            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="button_count" data-width="100px;"></div>
-        </p>
+        <div class="text-center">
+            <div class="fb-share-button" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)" data-type="button_count" data-width="100px;"></div>
+        </div>
     </div>
 </div>

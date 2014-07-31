@@ -98,7 +98,7 @@ namespace MongoDB.AspNet.Identity
         public Task<TUser> FindByNameAsync(string userName)
         {
             ThrowIfDisposed();
-            TUser user = _collection.FindOne((Query.EQ("UserName", userName)));
+            TUser user = _collection.FindOne((Query.EQ("Email", userName)));
             return Task.FromResult(user);
         }
 

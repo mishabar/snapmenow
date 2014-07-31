@@ -139,6 +139,9 @@ ul.nav.navbar-nav a {
 
 td.sale-title {
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 td.sale-end-date {
