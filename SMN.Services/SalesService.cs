@@ -58,5 +58,11 @@ namespace SMN.Services
             }
             return result;
         }
+
+
+        public bool LaunchSale(string id)
+        {
+            return _salesRepository.StartSale(id);
+        }
     }
 }

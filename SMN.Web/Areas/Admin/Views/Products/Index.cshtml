@@ -29,7 +29,11 @@ else
                     <td>
                         <img class="img-responsive" src="@item.Images[0]" />
                     </td>
-                    <td>@Html.ActionLink(item.Name, "Edit")</td>
+                    <td>@Html.ActionLink(item.Name, "Edit")
+                    @if (item.CurrentSale == null)
+                    {
+                        <br /><a href="@Url.Action("LaunchSale", "Products", new { area = "Admin", id = item.ID })" class="btn btn-success">Launch Sale</a>
+                    }</td>   
                     <td>@string.Format("{0:c}", item.MSRP)</td>
                     <td>@string.Format("{0:c}", item.MinPrice)</td>
                     <td>@item.ItemsAvailable</td>

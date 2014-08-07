@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using SMN.Services;
@@ -12,16 +13,18 @@ namespace SMN.Web.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private IProductsService _productsService;
+        private ISalesService _salesService;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductsService productsService, ISalesService salesService)
         {
             _productsService = productsService;
+            _salesService = salesService;
         }
 
         // GET: Admin/Products
         public ActionResult Index()
         {
-            IEnumerable<ProductToken> products = _productsService.GetAllForRetailer(User.Identity.Name);
+            IEnumerable<ProductToken> products = _productsService.GetAllForRetailer((User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value);
             return View(products);
         }
 
@@ -104,6 +107,15 @@ namespace SMN.Web.Areas.Admin.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult LaunchSale(string id)
+        {
+            if (_salesService.LaunchSale(id)) 
+            {
+                return RedirectToAction("Index");
+            }
+            return Redirect(Url.Action("Index") + "?failed=true");
         }
     }
 }
