@@ -7,7 +7,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-6 active-sale">
+        <div class="col-md-6 active-sale" data-id="@item.ID">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <table class="table">
@@ -20,7 +20,7 @@
                                 <td colspan="2" style="position: relative;">
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <img src="@item.Images[0]" class="img-responsive" />
-                                        <a class="btn btn-lg btn-warning btn-snapme" href="@Url.Action("Details", new { id = item.ID })"> Enter Sale (@string.Format("{0:c}", item.CurrentSale.CurrentPrice))<i class="ti-angle-right"></i></a>
+                                        <a class="btn btn-lg btn-warning btn-snapme" data-id="@item.ID" href="@Url.Action("Details", new { id = item.ID })"> Enter Sale (@string.Format("{0:c}", item.CurrentSale.CurrentPrice))<i class="ti-angle-right"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -38,9 +38,17 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
         </div>
     }
 </div>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/sales.js"></script>
+    <script type="text/javascript">
+        updatePrices(5000);
+    </script>
+}

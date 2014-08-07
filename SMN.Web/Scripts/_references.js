@@ -7,3 +7,4 @@
 /// <reference path="respond.js" />
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="jquery.cookie.js" />
+/// <reference path="sales.js" />

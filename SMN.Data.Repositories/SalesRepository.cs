@@ -64,7 +64,7 @@ namespace SMN.Data.Repositories
                 Sale sale = new Sale
                 {
                     ProductID = productId,
-                    CurrentPrice = (int)(product.MinPrice * 0.9),
+                    CurrentPrice = (int)(product.MSRP * 0.9),
                     StartedAt = DateTime.Now,
                     ID = ObjectId.GenerateNewId().ToString()
                 };

@@ -66,10 +66,20 @@ namespace SMN.Web.Controllers
             ProductToken token = _salesService.GetActiveSale(id, null);
             if (token.CurrentSale != null)
             {
-                return Json(new { price = token.CurrentSale.CurrentPrice, snaps = token.CurrentSale.Snaps }, JsonRequestBehavior.AllowGet);
+                return Json(new { 
+                    status = "active", 
+                    price = string.Format("{0:c}", token.CurrentSale.CurrentPrice),
+                    discount = Math.Round(token.CurrentSale.Discount, 2).ToString() + "%",
+                    snaps = token.CurrentSale.Snaps }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { error = "Sale is not active" }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = "inactive" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Prices()
+        {
+            IEnumerable<ProductToken> tokens = _salesService.GetActiveSales();
+            return Json(tokens.Select(t => new { status = "active", id = t.ID, price = string.Format("{0:c}", t.CurrentSale.CurrentPrice), snaps = t.CurrentSale.Snaps }), JsonRequestBehavior.AllowGet);
         }
     }
 }

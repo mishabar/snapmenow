@@ -13,7 +13,7 @@
     </div>
 }
 
-<div class="row sale-details">
+<div class="row sale-details" data-status="@(Model.Product.CurrentSale == null ? "inactive" : "active")">
     <div class="col-md-8">
         <div class="embed-responsive embed-responsive-16by9">
             <div class="embed-responsive-item" style="border: 1px solid #DDD;overflow: hidden;max-height: 100%;">
@@ -78,10 +78,9 @@
         @if (Model.Product.CurrentSale != null)
         {
             <p>
-
-                @if (User.Identity.IsAuthenticated)
+                @if (Request.IsAuthenticated)
                 {
-                    if (true)//(Model.Product.MySnap == null)
+                    if (Model.Product.MySnap == null)
                     {
                         using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
                         {
@@ -91,7 +90,6 @@
                     }
                     else
                     {
-                        <span class="btn btn-warning btn-block btn-lg">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</span>
                         <h3 class="text-center isnapped">You have Snapped this product @@ @string.Format("{0:c}", Model.Product.MySnap.Price)</h3>
                     }
                 }
@@ -122,3 +120,11 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/sales.js"></script>
+    <script type="text/javascript">
+        updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
+    </script>
+}
