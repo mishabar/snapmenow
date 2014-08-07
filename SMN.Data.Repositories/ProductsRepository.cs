@@ -19,7 +19,7 @@ namespace SMN.Data.Repositories
 
         public IEnumerable<Product> FindAllForRetailer(string retailerEmail)
         {
-            return _collection.Find(Query<Product>.EQ(p => p.Email, retailerEmail)).ToList();
+            return retailerEmail == null ?  _collection.FindAll().ToList() : _collection.Find(Query<Product>.EQ(p => p.Email, retailerEmail)).ToList();
         }
 
         public Product Create(Product product)

@@ -24,7 +24,15 @@ namespace SMN.Web.Areas.Admin.Controllers
         // GET: Admin/Products
         public ActionResult Index()
         {
-            IEnumerable<ProductToken> products = _productsService.GetAllForRetailer((User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value);
+            IEnumerable<ProductToken> products = null;
+            if (User.IsInRole("Administrator"))
+            {
+                products = _productsService.GetAllForRetailer(null);
+            }
+            else
+            {
+                products = _productsService.GetAllForRetailer((User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value);
+            }
             return View(products);
         }
 
