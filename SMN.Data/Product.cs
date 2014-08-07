@@ -22,7 +22,8 @@ namespace SMN.Data
         public int MinPrice { get; set; }
         public int ItemsAvailable { get; set; }
         [BsonIgnoreIfNull]
-        public BasicSaleData CurrentSale { get; set; }
+        public Sale CurrentSale { get; set; }
+        public int SnapPrice { get; set; }
 
         public Product()
         {

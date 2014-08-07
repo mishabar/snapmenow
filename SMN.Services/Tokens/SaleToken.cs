@@ -12,5 +12,6 @@ namespace SMN.Services.Tokens
         public float CurrentPrice { get; set; }
         public float Discount { get; set; }
         public int Snaps { get; set; }
+        public string ID { get; set; }
     }
 }

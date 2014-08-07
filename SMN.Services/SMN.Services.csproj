@@ -54,6 +54,7 @@
     <Compile Include="SalesService.cs" />
     <Compile Include="Tokens\ProductToken.cs" />
     <Compile Include="Tokens\SaleToken.cs" />
+    <Compile Include="Tokens\SnapToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SMN.Data.Repositories\SMN.Data.Repositories.csproj">

@@ -11,6 +11,8 @@ namespace SMN.Services
     {
         IEnumerable<Tokens.ProductToken> GetActiveSales();
 
-        ProductToken GetActiveSale(string id);
+        ProductToken GetActiveSale(string id, string email);
+
+        bool SnapProduct(string user, string id);
     }
 }

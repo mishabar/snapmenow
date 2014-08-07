@@ -12,6 +12,8 @@ namespace SMN.Web.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            Claim claim = new Claim(ClaimTypes.Email, this.Email);
+            userIdentity.AddClaim(claim);
             // Add custom user claims here
             return userIdentity;
         }

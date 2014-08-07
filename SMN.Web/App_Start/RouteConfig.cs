@@ -14,6 +14,13 @@ namespace SMN.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "SaleSnap",
+                url: "Sales/Snap",
+                namespaces: new string[] { "SMN.Web.Controllers" },
+                defaults: new { controller = "Sales", action = "Snap" }
+            );
+
+            routes.MapRoute(
                 name: "SaleDetails",
                 url: "Sales/{id}",
                 namespaces: new string[] { "SMN.Web.Controllers" },

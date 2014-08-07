@@ -20,7 +20,7 @@ namespace SMN.Services
 
         public IEnumerable<Tokens.ProductToken> GetAllForRetailer(string retailerEmail)
         {
-            return _productsRepository.FindAllForRetailer(retailerEmail).Select(p => p.AsToken());
+            return _productsRepository.FindAllForRetailer(retailerEmail).Select(p => p.AsToken(null));
         }
 
         public void CreateProduct(ProductToken token, System.Web.HttpFileCollectionBase files)

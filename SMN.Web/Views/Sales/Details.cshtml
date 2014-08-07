@@ -1,6 +1,6 @@
-﻿@model SMN.Services.Tokens.ProductToken
+﻿@model SMN.Web.Models.SaleDetailsModel
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = Model.Product.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +20,7 @@
                 <div id="images-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        @for (int i = 0; i < Model.Images.Length; i++)
+                        @for (int i = 0; i < Model.Product.Images.Length; i++)
                         {
                             <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
                         }
@@ -28,10 +28,10 @@
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        @for (int i = 0; i < Model.Images.Length; i++)
+                        @for (int i = 0; i < Model.Product.Images.Length; i++)
                         {
                             <div class="item @(i == 0 ? "active" : "")">
-                                <img src="@Model.Images[i]" />
+                                <img src="@Model.Product.Images[i]" />
                             </div>
                         }
                     </div>
@@ -47,10 +47,10 @@
             </div>
         </div>
         <div class="more-images row">
-            @foreach (var item in Model.Images)
+            @for (int i = 0; i < Model.Product.Images.Length; i++)
             {
                 <div class="col-sm-2">
-                    <div class="img-thumbnail" style="background-image: url(@item)"></div>
+                    <div class="img-thumbnail" style="background-image: url(@Model.Product.Images[i])" onclick="$('#images-carousel').carousel(@i)"></div>
                 </div>
             }
         </div>
@@ -59,35 +59,65 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><strong>Description</strong></div>
                     <div class="panel-body">
-                        @Html.Raw(Model.Description)
+                        @Html.Raw(Model.Product.Description)
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <h2>@Model.Name</h2>
+        <h2>@Model.Product.Name</h2>
         <div class="msrp">
-            <div>Ends At: <strong>@Model.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
-            <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.MSRP)</span></div>
-            <div class="discount">Current Discount: @Math.Round(Model.CurrentSale.Discount, 2)%</div>
+            <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.Product.MSRP)</span></div>
+            @if (Model.Product.CurrentSale != null)
+            {
+                <div>Ends At: <strong>@Model.Product.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
+                <div class="discount">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice) (-@Math.Round(Model.Product.CurrentSale.Discount, 2)%)</div>
+            }
         </div>
-        <p>
-            <a class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.CurrentSale.CurrentPrice)</a>
-        </p>
-        @if (Model.CurrentSale.Snaps == 0)
+        @if (Model.Product.CurrentSale != null)
         {
-            <p class="text-center">
-                No Snaps yet. Be the first to Snap and get additional 5% discount at Checkout!
+            <p>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (true)//(Model.Product.MySnap == null)
+                    {
+                        using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@Model.Product.ID" />
+                            <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</button>
+                        }
+                    }
+                    else
+                    {
+                        <span class="btn btn-warning btn-block btn-lg">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</span>
+                        <h3 class="text-center isnapped">You have Snapped this product @@ @string.Format("{0:c}", Model.Product.MySnap.Price)</h3>
+                    }
+                }
+                else
+                {
+                    <a class="btn btn-lg btn-success btn-block btn-snapme" href="@Url.Action("Login", "Account", new { Area = "", ReturnUrl = Request.Url.PathAndQuery })">Login or Register to Snap</a>
+                }
             </p>
+            if (Model.Product.CurrentSale.Snaps == 0)
+            {
+                <p class="text-center">
+                    No Snaps yet. Be the first to Snap and get additional 5% discount at Checkout!
+                </p>
+            }
+            else
+            {
+                <h4 class="text-center">
+                    @Model.Product.CurrentSale.Snaps @(Model.Product.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
+                </h4>
+            }
         }
         else
-        { 
-            <p class="text-center">
-                @Model.CurrentSale.Snaps @(Model.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
-            </p>
+        {
+            <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4> 
         }
-        <div class="text-center">
+        <div class="text-center" style="margin-top: 30px;">
             <div class="fb-share-button" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)" data-type="button_count" data-width="100px;"></div>
         </div>
     </div>

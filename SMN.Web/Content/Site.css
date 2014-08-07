@@ -78,6 +78,14 @@ ul.nav.navbar-nav a {
     color: #666;
 }
 
+ul.nav.navbar-nav a.slogan {
+    font-style: italic;
+    font-size: 18px;
+    font-family: 'Fira Sans';
+    font-weight: normal;
+    color: #AAA;
+}
+
 .landing-page h2 {
     text-align: center;
 }
@@ -189,7 +197,7 @@ td.sale-end-date {
 }
 
     .sale-details .msrp .discount {
-        font-size: 1.8em;
+        font-size: 1.4em;
         font-weight: bold;
         color: #5CB85C;
     }
@@ -233,6 +241,7 @@ td.sale-end-date {
 
     .sale-details .more-images div.img-thumbnail {
         opacity: 0.5;
+        cursor: pointer;
     }
 
         .sale-details .more-images div.img-thumbnail:hover {

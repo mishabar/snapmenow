@@ -20,7 +20,7 @@
                                 <td colspan="2" style="position: relative;">
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <img src="@item.Images[0]" class="img-responsive" />
-                                        <a class="btn btn-lg btn-warning btn-snapme" href="@Url.Action("Details", new { id = item.ID })">Snap Me Now @@ @string.Format("{0:c}", item.CurrentSale.CurrentPrice / 100)<i class="ti-angle-right"></i></a>
+                                        <a class="btn btn-lg btn-warning btn-snapme" href="@Url.Action("Details", new { id = item.ID })"> Enter Sale (@string.Format("{0:c}", item.CurrentSale.CurrentPrice))<i class="ti-angle-right"></i></a>
                                     </div>
                                 </td>
                             </tr>

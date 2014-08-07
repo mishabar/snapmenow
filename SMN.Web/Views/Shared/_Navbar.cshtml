@@ -9,6 +9,9 @@
             @Html.ActionLink(System.Configuration.ConfigurationManager.AppSettings["App:Name"], "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav hidden-xs">
+                <li><a class="slogan">Snap More, Pay Less</a></li>
+            </ul>
             @Html.Partial("_LoginPartial")
         </div>
     </div>

@@ -31,13 +31,13 @@ namespace SMN.Services.Tokens
         [Range(0, 10000)]
         [Display(Name = "Items Available")]
         public int ItemsAvailable { get; set; }
-
         public SaleToken CurrentSale { get; set; }
+        public SnapToken MySnap { get; set; }
     }
 
     public static class ProductTokenExtensions 
     {
-        public static ProductToken AsToken(this Product product)
+        public static ProductToken AsToken(this Product product, string email)
         {
             return new ProductToken
             {
@@ -54,9 +54,10 @@ namespace SMN.Services.Tokens
                 {
                     CurrentPrice = (float)product.CurrentSale.CurrentPrice / (float)100,
                     Discount = (1 - ((float)product.CurrentSale.CurrentPrice / (float)product.MSRP)) * 100,
-                    EndsAt = product.CurrentSale.EndsAt,
-                    Snaps = product.CurrentSale.Snaps
-                }
+                    EndsAt = product.CurrentSale.StartedAt.AddHours(24),
+                    Snaps = product.CurrentSale.Snaps.Count
+                },
+                MySnap = (email == null || product.CurrentSale == null || !product.CurrentSale.Snaps.Any(s => s.UserID == email) ? null : product.CurrentSale.Snaps.First(s => s.UserID == email).AsToken())
             };
         }
 

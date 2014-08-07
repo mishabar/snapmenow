@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Welcome";
+    ViewBag.Title = "Daily Sales, Low Prices & Huge Savings";
+    ViewBag.Description = "Snap Me Now allows customers to lower the price by Snapping a product. More Snaps - Lower the price goes. Discover new and exciting products every day.";
 }
 
 <div class="row">
@@ -20,15 +21,15 @@
 <div class="row landing-page">
     <div class="col-md-4">
         <h2>Browse</h2>
-        <p class="text-center">Browse the list of our <a href="@Url.Action("Index", "Sales")">active sales</a> and entera sale of a product that you want.</p>
+        <p class="text-center">Browse our <a href="@Url.Action("Index", "Sales")">active sales</a> page and enter a sale of a product you like.</p>
     </div>
     <div class="col-md-4">
         <h2>Snap and Share</h2>
-        <p class="text-center">Hit Snap to reserve it at the current price and wait for the sale to end. Or Share with your friends and pay even less.</p>
+        <p class="text-center">Hit Snap Now to reserve a product and lower the price, then Share it with your friends.</p>
     </div>
     <div class="col-md-4">
-        <h2>Pay Less</h2>
-        <p class="text-center">Get an email with the final price once the sale is over and proceed with the checkout.</p>
+        <h2>Checkout</h2>
+        <p class="text-center">Sit back and relax! Once a sale is over, you will be notified to complete the checkout.</p>
     </div>
 </div>
 <p></p>
@@ -52,3 +53,20 @@
     </div>
 </div>
 <div class="clearfix"></div>
+
+<div class="modal fade" id="ft-modal" data-remote="@Url.Action("FirstTime", "Home")" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        if (typeof ($.cookie("smn.ft")) === "undefined"){
+            $("#ft-modal").modal();
+            $.cookie("smn.ft", (new Date()).getTime(), { expires: 365 });
+        }
+    </script>
+}

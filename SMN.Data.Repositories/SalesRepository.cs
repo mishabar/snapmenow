@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
@@ -21,17 +22,58 @@ namespace SMN.Data.Repositories
 
         public IEnumerable<Product> GetActive()
         {
-            //Product p1 = _productsCollection.FindOne();
-            //Sale s1 = new Sale { ProductID = p1.ID, StartedAt = DateTime.Now };
-            //_salesCollection.Insert(s1);
-            //p1.CurrentSale = new BasicSaleData { CurrentPrice = (int)(p1.MSRP * 0.75), EndsAt = DateTime.Now.AddHours(24), ID = s1.ID  };
-            //_productsCollection.Save(p1);
-            return _productsCollection.Find(Query<Product>.Exists(p => p.CurrentSale));
+            return _productsCollection.Find(Query<Product>.NE(p => p.CurrentSale, null));
         }
 
         public Product GetActive(string id)
         {
             return _productsCollection.FindOne(Query<Product>.EQ(p => p.ID, id));
+        }
+
+
+        public bool SnapProduct(string user, Product product)
+        {
+            if (product.ItemsAvailable > 0 && product.CurrentSale != null)
+            {
+                product.ItemsAvailable--;
+                product.CurrentSale.Snaps.Add(new Snap { SnappedAt = DateTime.Now, Price = product.CurrentSale.CurrentPrice, ProductID = product.ID, UserID = user, FinalPrice = 0 });
+                product.CurrentSale.CurrentPrice -= product.SnapPrice;
+                _productsCollection.Save(product);
+
+                if (product.ItemsAvailable == 0 || product.CurrentSale.CurrentPrice <= product.MinPrice)
+                {
+                    // End sale
+                    product.CurrentSale.EndedAt = DateTime.Now;
+                    _salesCollection.Insert(product.CurrentSale);
+                    product.CurrentSale = null;
+                    _productsCollection.Save(product);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public bool StartSale(string productId)
+        {
+            Product product = _productsCollection.FindOne(Query<Product>.EQ(p => p.ID, productId));
+            if (product != null && product.ItemsAvailable > 0 && product.CurrentSale == null)
+            {
+                Sale sale = new Sale
+                {
+                    ProductID = productId,
+                    CurrentPrice = (int)(product.MinPrice * 0.9),
+                    StartedAt = DateTime.Now,
+                    ID = ObjectId.GenerateNewId().ToString()
+                };
+                product.CurrentSale = sale;
+                _productsCollection.Save(product);
+
+                return true;
+            }
+            return false;
         }
     }
 }

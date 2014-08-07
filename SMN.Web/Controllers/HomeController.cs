@@ -38,5 +38,10 @@ namespace SMN.Web.Controllers
         {
             return View();
         }
+
+        public PartialViewResult FirstTime()
+        {
+            return PartialView("_FirstTime");
+        }
     }
 }

@@ -11,5 +11,9 @@ namespace SMN.Data.Repositories
         IEnumerable<Product> GetActive();
 
         Product GetActive(string id);
+
+        bool SnapProduct(string user, Product product);
+
+        bool StartSale(string productId);
     }
 }
