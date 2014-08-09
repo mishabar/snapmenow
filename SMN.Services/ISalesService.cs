@@ -13,7 +13,7 @@ namespace SMN.Services
 
         ProductToken GetActiveSale(string id, string email);
 
-        bool SnapProduct(string user, string id);
+        SnapToken SnapProduct(string user, string id);
 
         bool LaunchSale(string id);
     }

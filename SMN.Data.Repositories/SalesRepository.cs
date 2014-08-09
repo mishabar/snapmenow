@@ -31,12 +31,14 @@ namespace SMN.Data.Repositories
         }
 
 
-        public bool SnapProduct(string user, Product product)
+        public Snap SnapProduct(string user, Product product)
         {
+            Snap snap = null;
             if (product.ItemsAvailable > 0 && product.CurrentSale != null)
             {
                 product.ItemsAvailable--;
-                product.CurrentSale.Snaps.Add(new Snap { SnappedAt = DateTime.Now, Price = product.CurrentSale.CurrentPrice, ProductID = product.ID, UserID = user, FinalPrice = 0 });
+                snap = new Snap { SnappedAt = DateTime.Now, Price = product.CurrentSale.CurrentPrice, ProductID = product.ID, UserID = user, FinalPrice = 0 };
+                product.CurrentSale.Snaps.Add(snap);
                 product.CurrentSale.CurrentPrice -= product.SnapPrice;
                 _productsCollection.Save(product);
 
@@ -49,10 +51,10 @@ namespace SMN.Data.Repositories
                     _productsCollection.Save(product);
                 }
 
-                return true;
+                return snap;
             }
 
-            return false;
+            return snap;
         }
 
 

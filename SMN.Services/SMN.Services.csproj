@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailService.cs" />
+    <Compile Include="IEmailService.cs" />
     <Compile Include="IProductsService.cs" />
     <Compile Include="ISalesService.cs" />
     <Compile Include="ProductsService.cs" />

@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\SaleDetailsModel.cs" />
@@ -186,6 +187,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\email_header.png" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -270,6 +272,9 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\HowItWorks.cshtml" />
     <Content Include="Views\Home\_FirstTime.cshtml" />
+    <Content Include="Views\Email\_EmailLayout.cshtml" />
+    <Content Include="Views\Email\Register.cshtml" />
+    <Content Include="Views\Email\Snap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

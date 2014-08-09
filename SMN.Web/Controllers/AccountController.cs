@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
+using SMN.Web.Helpers;
 using SMN.Web.Models;
 
 namespace SMN.Web.Controllers
@@ -27,7 +28,8 @@ namespace SMN.Web.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -102,6 +104,9 @@ namespace SMN.Web.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    ViewRenderer renderer = new ViewRenderer();
+                    string body = renderer.RenderViewToString("~/Views/Email/Register.cshtml", new Dictionary<string, object> { { "Username", model.Email } });
+                    await UserManager.EmailService.SendAsync(new IdentityMessage { Body = body, Destination = model.Email, Subject = "Welcome to Snap Me Now" });
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -119,7 +124,7 @@ namespace SMN.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -179,13 +184,13 @@ namespace SMN.Web.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -438,6 +443,10 @@ namespace SMN.Web.Controllers
                         result = await UserManager.AddLoginAsync(user.Id, info.Login);
                         if (result.Succeeded)
                         {
+                            ViewRenderer renderer = new ViewRenderer();
+                            string body = renderer.RenderViewToString("~/Views/Email/Register.cshtml", new Dictionary<string, object> { { "Username", user.UserName } });
+                            await UserManager.EmailService.SendAsync(new IdentityMessage { Body = body, Destination = model.Email, Subject = "Welcome to Snap Me Now" });
+
                             await SignInAsync(user, isPersistent: false);
 
                             // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -556,7 +565,8 @@ namespace SMN.Web.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

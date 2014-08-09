@@ -12,6 +12,7 @@ namespace SMN.Services.Tokens
         public string User { get; set; }
         public float Price { get; set; }
         public DateTime SnappedAt { get; set; }
+        public string ProductName { get; set; }
     }
 
     public static class SnapTokenExtensions

@@ -12,7 +12,7 @@ namespace SMN.Data.Repositories
 
         Product GetActive(string id);
 
-        bool SnapProduct(string user, Product product);
+        Snap SnapProduct(string user, Product product);
 
         bool StartSale(string productId);
     }

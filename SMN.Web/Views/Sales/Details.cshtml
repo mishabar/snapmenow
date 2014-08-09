@@ -113,10 +113,12 @@
         }
         else
         {
-            <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4> 
+            <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4>
         }
         <div class="text-center" style="margin-top: 30px;">
-            <div class="fb-share-button" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)" data-type="button_count" data-width="100px;"></div>
+            @*<div class="fb-share-button" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)" data-type="button_count" data-width="100px;"></div>*@
+            <button type="button" class="btn btn-fbshare" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)"><i class="ti-facebook"></i></button>
+            <a target="_blank" href="http://pinterest.com/pin/create/link/?url=@Url.Encode(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath))&media=@Url.Encode(Model.Product.Images[0])&description=@Server.HtmlEncode(Model.Product.Name)" class="btn btn-default pin-it-button"><i class="ti-pinterest"></i></a>
         </div>
     </div>
 </div>

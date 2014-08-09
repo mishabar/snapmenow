@@ -29,3 +29,10 @@ function updatePrices(interval) {
         setTimeout(updatePrices, interval, interval);
     });
 }
+
+$(".btn-fbshare").on("click", function () {
+    FB.ui({
+        method: 'share',
+        href: $(this).data("href"),
+    }, function (response) { });
+});

@@ -36,12 +36,12 @@ namespace SMN.Services
             return _salesRepository.GetActive(id).AsToken(email);
         }
 
-        public bool SnapProduct(string user, string id)
+        public SnapToken SnapProduct(string user, string id)
         {
-            bool result = false;
+            SnapToken token = null;
             Product product = _salesRepository.GetActive(id);
             if (product.CurrentSale == null)
-                return result;
+                return token;
 
             object obj = null;
             lock (_locks)
@@ -54,9 +54,10 @@ namespace SMN.Services
             }
             lock (obj)
             {
-                result = _salesRepository.SnapProduct(user, product);
+                token = _salesRepository.SnapProduct(user, product).AsToken();
+                token.ProductName = product.Name;
             }
-            return result;
+            return token;
         }
 
 

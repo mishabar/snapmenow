@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using SMN.Services;
 using SMN.Services.Tokens;
+using SMN.Web.Helpers;
 using SMN.Web.Models;
 
 namespace SMN.Web.Controllers
@@ -14,10 +15,12 @@ namespace SMN.Web.Controllers
     {
         private static object _locker = new object();
         private ISalesService _salesService;
+        private IEmailService _emailService;
 
-        public SalesController(ISalesService salesService)
+        public SalesController(ISalesService salesService, IEmailService emailService)
         {
             _salesService = salesService;
+            _emailService = emailService;
         }
 
         // GET: Sales
@@ -49,8 +52,13 @@ namespace SMN.Web.Controllers
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             lock (_locker)
             {
-                if (_salesService.SnapProduct(email, id))
+                SnapToken token = _salesService.SnapProduct(email, id);
+                if (token != null)
                 {
+                    ViewRenderer renderer = new ViewRenderer();
+                    string body = renderer.RenderViewToString("~/Views/Email/Snap.cshtml", 
+                        new Dictionary<string, object> { { "Title", token.ProductName }, { "Price", token.Price }, { "ID", id } });
+                    _emailService.Send(email, "You have just Snapped a " + token.ProductName, body);
                     return Redirect(Url.RouteUrl("SaleDetails", new { id = id }) + "?snapped=true");
                 }
             }
