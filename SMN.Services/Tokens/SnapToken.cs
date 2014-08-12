@@ -9,10 +9,14 @@ namespace SMN.Services.Tokens
 {
     public class SnapToken
     {
+        public string ID { get; set; }
         public string User { get; set; }
         public float Price { get; set; }
         public DateTime SnappedAt { get; set; }
         public string ProductName { get; set; }
+        public float FinalPrice { get; set; }
+        public string SaleID { get; set; }
+        public string Status { get; set; }
     }
 
     public static class SnapTokenExtensions
@@ -23,7 +27,22 @@ namespace SMN.Services.Tokens
             {
                 User = snap.UserID,
                 Price = (float)snap.Price / (float)100,
-                SnappedAt = snap.SnappedAt
+                SnappedAt = snap.SnappedAt,
+                FinalPrice = (float)snap.FinalPrice / (float)100
+            };
+        }
+
+        public static SnapToken AsToken(this UserSnap snap)
+        {
+            return new SnapToken
+            {
+                ID = snap.ID,
+                User = snap.UserID,
+                Price = (float)snap.Price / (float)100,
+                SnappedAt = snap.SnappedAt,
+                FinalPrice = (float)snap.FinalPrice / (float)100,
+                ProductName = snap.ProductName,
+                Status = snap.Status
             };
         }
     }

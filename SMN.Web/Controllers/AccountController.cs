@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
+using SMN.Services;
+using SMN.Services.Tokens;
 using SMN.Web.Helpers;
 using SMN.Web.Models;
 
@@ -18,9 +20,10 @@ namespace SMN.Web.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private ISalesService _salesService;
+        public AccountController(ISalesService salesService)
         {
+            _salesService = salesService;
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -592,5 +595,11 @@ namespace SMN.Web.Controllers
             }
         }
         #endregion
+
+        public ActionResult History()
+        {
+            IEnumerable<SnapToken> snaps = _salesService.GetUserSnaps((User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value);
+            return View(snaps);
+        }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SMN.Services.Tokens.SnapToken>
+@{
+    ViewBag.Title = "Snaps History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Snaps History</h2>
+<hr />
+@if (Model.Count() == 0)
+{
+    <div>You have yet to Snap a product.</div> 
+}
+else
+{
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Snapped On</th>
+                <th>Snap Price</th>
+                <th>Final Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.SnappedAt.ToString()</td>
+                    <td>@string.Format("{0:c}", item.Price)</td>
+                    <td>@string.Format("{0:c}", item.FinalPrice)</td>
+                    <td>@item.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table> 
+}

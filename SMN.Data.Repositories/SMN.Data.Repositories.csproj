@@ -47,9 +47,11 @@
   <ItemGroup>
     <Compile Include="IProductsRepository.cs" />
     <Compile Include="ISalesRepository.cs" />
+    <Compile Include="IUserSnapsRepository.cs" />
     <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesRepository.cs" />
+    <Compile Include="UserSnapsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

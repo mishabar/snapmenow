@@ -13,8 +13,12 @@ namespace SMN.Services
 
         ProductToken GetActiveSale(string id, string email);
 
-        SnapToken SnapProduct(string user, string id);
+        SnapToken SnapProduct(string user, string id, out bool saleIsOver);
 
         bool LaunchSale(string id);
+
+        IEnumerable<SnapToken> GetUserSnaps(string email);
+
+        IEnumerable<SnapToken> GetSaleSnaps(string saleID);
     }
 }

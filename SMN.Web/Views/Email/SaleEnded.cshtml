@@ -1,0 +1,16 @@
+﻿@model IDictionary<string, object>
+@{
+    ViewBag.Title = Model["Title"] + " sale is over";
+    Layout = "~/Views/Email/_EmailLayout.cshtml";
+}
+
+<p>
+    @Model["Title"] sale has just ended. The final price is @string.Format("{0:c}", Model["Price"]).<br />
+    Please follow the instructions here to <a href="#">complete the checkout</a>.
+</p>
+<p>
+    Thanks,<br />
+    Snap Me Now Team
+</p>
+
+

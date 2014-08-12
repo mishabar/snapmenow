@@ -275,6 +275,8 @@
     <Content Include="Views\Email\_EmailLayout.cshtml" />
     <Content Include="Views\Email\Register.cshtml" />
     <Content Include="Views\Email\Snap.cshtml" />
+    <Content Include="Views\Email\SaleEnded.cshtml" />
+    <Content Include="Views\Account\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

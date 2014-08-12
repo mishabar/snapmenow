@@ -13,11 +13,13 @@ namespace SMN.Data.Repositories
     {
         private MongoCollection<Product> _productsCollection;
         private MongoCollection<Sale> _salesCollection;
+        private MongoCollection<UserSnap> _userSnapsCollection;
 
         public SalesRepository(MongoDatabase db)
         {
             _productsCollection = db.GetCollection<Product>("products");
             _salesCollection = db.GetCollection<Sale>("sales");
+            _userSnapsCollection = db.GetCollection<UserSnap>("user_snaps");
         }
 
         public IEnumerable<Product> GetActive()
@@ -36,6 +38,7 @@ namespace SMN.Data.Repositories
             Snap snap = null;
             if (product.ItemsAvailable > 0 && product.CurrentSale != null)
             {
+                int currentPrice = product.CurrentSale.CurrentPrice;
                 product.ItemsAvailable--;
                 snap = new Snap { SnappedAt = DateTime.Now, Price = product.CurrentSale.CurrentPrice, ProductID = product.ID, UserID = user, FinalPrice = 0 };
                 product.CurrentSale.Snaps.Add(snap);
@@ -45,8 +48,11 @@ namespace SMN.Data.Repositories
                 if (product.ItemsAvailable == 0 || product.CurrentSale.CurrentPrice <= product.MinPrice)
                 {
                     // End sale
+                    snap.FinalPrice = currentPrice;
                     product.CurrentSale.EndedAt = DateTime.Now;
                     _salesCollection.Insert(product.CurrentSale);
+                    _userSnapsCollection.Update(Query<UserSnap>.EQ(s => s.SaleID, product.CurrentSale.ID), 
+                        Update<UserSnap>.Set(s => s.FinalPrice, currentPrice).Set(s => s.Status, "Awaiting Checkout"), new MongoUpdateOptions { Flags = UpdateFlags.Multi });
                     product.CurrentSale = null;
                     _productsCollection.Save(product);
                 }
@@ -76,6 +82,12 @@ namespace SMN.Data.Repositories
                 return true;
             }
             return false;
+        }
+
+
+        public Sale GetSale(string saleID)
+        {
+            return _salesCollection.FindOne(Query<Sale>.EQ(s => s.ID, saleID));
         }
     }
 }

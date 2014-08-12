@@ -52,13 +52,28 @@ namespace SMN.Web.Controllers
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             lock (_locker)
             {
-                SnapToken token = _salesService.SnapProduct(email, id);
+                bool saleIsOver = false;
+                SnapToken token = _salesService.SnapProduct(email, id, out saleIsOver);
                 if (token != null)
                 {
                     ViewRenderer renderer = new ViewRenderer();
-                    string body = renderer.RenderViewToString("~/Views/Email/Snap.cshtml", 
+                    string body = renderer.RenderViewToString("~/Views/Email/Snap.cshtml",
                         new Dictionary<string, object> { { "Title", token.ProductName }, { "Price", token.Price }, { "ID", id } });
                     _emailService.Send(email, "You have just Snapped a " + token.ProductName, body);
+
+                    if (saleIsOver)
+                    {
+                        body = null;
+                        foreach (var snap in _salesService.GetSaleSnaps(token.SaleID))
+                        {
+                            if (body == null)
+                            {
+                                body = renderer.RenderViewToString("~/Views/Email/SaleEnded.cshtml",
+                                    new Dictionary<string, object> { { "Title", token.ProductName }, { "Price", snap.FinalPrice }, { "ID", snap.ID } });
+                            }
+                            _emailService.Send(email, token.ProductName + " the sale is over", body);
+                        }
+                    }
                     return Redirect(Url.RouteUrl("SaleDetails", new { id = id }) + "?snapped=true");
                 }
             }
@@ -74,11 +89,13 @@ namespace SMN.Web.Controllers
             ProductToken token = _salesService.GetActiveSale(id, null);
             if (token.CurrentSale != null)
             {
-                return Json(new { 
-                    status = "active", 
+                return Json(new
+                {
+                    status = "active",
                     price = string.Format("{0:c}", token.CurrentSale.CurrentPrice),
                     discount = Math.Round(token.CurrentSale.Discount, 2).ToString() + "%",
-                    snaps = token.CurrentSale.Snaps }, JsonRequestBehavior.AllowGet);
+                    snaps = token.CurrentSale.Snaps
+                }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { status = "inactive" }, JsonRequestBehavior.AllowGet);

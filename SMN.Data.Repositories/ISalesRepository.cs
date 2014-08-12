@@ -15,5 +15,7 @@ namespace SMN.Data.Repositories
         Snap SnapProduct(string user, Product product);
 
         bool StartSale(string productId);
+
+        Sale GetSale(string saleID);
     }
 }
