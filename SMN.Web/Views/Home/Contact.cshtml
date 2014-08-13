@@ -1,8 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact Us";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@section fullwidth_top
+{
+    <div class="toolbar">
+        <div class="container">
+            <i class="ti-layout-grid2"></i> <a href="@Url.Action("Index", "Sales")">Active Sales List</a>
+        </div>
+    </div>
+}
+<h2>@ViewBag.Title</h2>
 
 <address>
     One Microsoft Way<br />

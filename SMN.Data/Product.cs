@@ -24,6 +24,7 @@ namespace SMN.Data
         [BsonIgnoreIfNull]
         public Sale CurrentSale { get; set; }
         public int SnapPrice { get; set; }
+        public float Rank { get; set; }
 
         public Product()
         {

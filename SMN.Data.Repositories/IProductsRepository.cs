@@ -11,5 +11,6 @@ namespace SMN.Data.Repositories
         IEnumerable<Product> FindAllForRetailer(string retailerEmail);
         Product Create(Product product);
         Product Get(string id);
+        void Update(Product product);
     }
 }

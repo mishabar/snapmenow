@@ -2,7 +2,14 @@
     ViewBag.Title = "FAQ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section fullwidth_top
+{
+    <div class="toolbar">
+        <div class="container">
+            <i class="ti-layout-grid2"></i> <a href="@Url.Action("Index", "Sales")">Active Sales List</a>
+        </div>
+    </div>
+}
 
 <div class="row">
     <div class="col-md-12">

@@ -23,7 +23,7 @@ namespace SMN.Services
             return _productsRepository.FindAllForRetailer(retailerEmail).Select(p => p.AsToken(null));
         }
 
-        public void CreateProduct(ProductToken token, System.Web.HttpFileCollectionBase files)
+        public void Create(ProductToken token, System.Web.HttpFileCollectionBase files)
         {
             Product product = _productsRepository.Create(token.AsProduct());
         }
@@ -31,6 +31,11 @@ namespace SMN.Services
         public ProductToken Get(string id)
         {
             return _productsRepository.Get(id).AsToken(null);
+        }
+
+        public void Update(ProductToken token)
+        {
+            _productsRepository.Update(token.AsProduct());
         }
     }
 }

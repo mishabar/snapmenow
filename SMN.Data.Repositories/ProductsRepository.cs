@@ -36,5 +36,17 @@ namespace SMN.Data.Repositories
         {
             return _collection.FindOne(Query<Product>.EQ(p => p.ID, id));
         }
+
+        public void Update(Product product)
+        {
+            Product currentState = _collection.FindOneById(product.ID);
+            if (currentState.CurrentSale != null)
+                throw new InvalidOperationException("Cannot update a Product during Active Sale");
+
+            _collection.Update(Query<Product>.EQ(p => p.ID, product.ID),
+                Update<Product>.Set(p => p.Name, product.Name).Set(p => p.Description, product.Description)
+                .Set(p => p.SKU, product.SKU).Set(p => p.MSRP, product.MSRP).Set(p => p.MinPrice, product.MinPrice)
+                .Set(p => p.SnapPrice, product.SnapPrice).Set(p => p.ItemsAvailable, product.ItemsAvailable));
+        }
     }
 }

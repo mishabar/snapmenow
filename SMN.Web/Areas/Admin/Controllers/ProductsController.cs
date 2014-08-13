@@ -62,7 +62,7 @@ namespace SMN.Web.Areas.Admin.Controllers
                         ModelState.AddModelError("", "Please select at least one image");
                         return View(token);
                     }
-                    _productsService.CreateProduct(token, Request.Files);
+                    _productsService.Create(token, Request.Files);
                     return RedirectToAction("Index");
                 }
             }
@@ -74,25 +74,32 @@ namespace SMN.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Products/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            ProductToken token = _productsService.Get(id);
+            if (token.CurrentSale != null)
+                return RedirectToAction("Index");
+
+            return View(token);
         }
 
         // POST: Admin/Products/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ProductToken token)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    _productsService.Update(token);
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
+            return View(token);
         }
 
         // GET: Admin/Products/Delete/5

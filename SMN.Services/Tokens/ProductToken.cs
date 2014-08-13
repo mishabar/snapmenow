@@ -31,6 +31,10 @@ namespace SMN.Services.Tokens
         [Range(0, 10000)]
         [Display(Name = "Items Available")]
         public int ItemsAvailable { get; set; }
+        [Required]
+        [Range(2, 1000)]
+        [Display(Name = "Snap Price")]
+        public int SnapPrice { get; set; }
         public SaleToken CurrentSale { get; set; }
         public SnapToken MySnap { get; set; }
     }
@@ -45,11 +49,12 @@ namespace SMN.Services.Tokens
                 Email = product.Email,
                 SKU = product.SKU,
                 Name = product.Name,
-                Description = product.Description,
+                Description = product.Description.Replace(Environment.NewLine, "<br/>"),
                 Images = product.Images,
                 MSRP = (float)product.MSRP / (float)100,
                 MinPrice = (float)product.MinPrice / (float)100,
                 ItemsAvailable = product.ItemsAvailable,
+                SnapPrice = product.SnapPrice,
                 CurrentSale = product.CurrentSale == null ? null : new SaleToken 
                 {
                     CurrentPrice = (float)product.CurrentSale.CurrentPrice / (float)100,
@@ -73,7 +78,8 @@ namespace SMN.Services.Tokens
                 Images = token.Images,
                 MSRP = (int)(token.MSRP * 100),
                 MinPrice = (int)(token.MinPrice * 100),
-                ItemsAvailable = token.ItemsAvailable
+                ItemsAvailable = token.ItemsAvailable,
+                SnapPrice = token.SnapPrice
             };
         }
     }

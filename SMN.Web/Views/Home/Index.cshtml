@@ -3,21 +3,27 @@
     ViewBag.Description = "Snap Me Now allows customers to lower the price by Snapping a product. More Snaps - Lower the price goes. Discover new and exciting products every day.";
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="top-banner embed-responsive">
-            <div class="embed-responsive-item">
-                <div style=" padding: 50px 0 0 50px">
-                    <h2>24 Hour Sales!</h2>
-                    <h2>Huge Savings! Snap Yours Now!</h2>
-                    <p style="margin-top: 20px;">
-                        <a class="btn btn-lg btn-success" id="registerLink" href="@Url.Action("Register", "Account", routeValues: null)">Get Started Now <i class="ti-angle-right"></i></a>
-                    </p>
+@section fullwidth_top
+{
+    <div class="top-banner embed-responsive">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="embed-responsive-item">
+                        <div style=" padding: 50px 0 0 50px">
+                            <h2>24 Hour Sales!</h2>
+                            <h2>Huge Savings! Snap Yours Now!</h2>
+                            <p style="margin-top: 20px;">
+                                <a class="btn btn-lg btn-success" id="registerLink" href="/Account/Register">Get Started Now <i class="ti-angle-right"></i></a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
+
 <div class="row landing-page">
     <div class="col-md-4">
         <h2>Browse</h2>
@@ -64,7 +70,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        if (typeof ($.cookie("smn.ft")) === "undefined"){
+        if (typeof ($.cookie("smn.ft")) === "undefined") {
             $("#ft-modal").modal();
             $.cookie("smn.ft", (new Date()).getTime(), { expires: 365 });
         }

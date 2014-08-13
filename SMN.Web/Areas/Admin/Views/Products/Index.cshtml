@@ -4,11 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section fullwidth_top
+{
+    <div class="toolbar">
+        <div class="container">
+            <i class="ti-pencil-alt"></i> <a href="@Url.Action("Create", "Products", new { Area = "Admin" })">Add Product</a>
+        </div>
+    </div>
+}
+
 <h2>Products List <small>Use this page to manage your products list</small></h2>
 <hr />
 @if (Model.Count() == 0)
 {
-    <div class="text-center">You have no products in the list. <a href="@Url.Action("Create", "Products", new { Area = "Admin" })">Add a new one.</a></div> 
+    <div class="text-center">You have no products in the list. <a href="@Url.Action("Create", "Products", new { Area = "Admin" })">Add a new one.</a></div>
 }
 else
 {
@@ -26,19 +35,30 @@ else
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="position: relative;">
                         <img class="img-responsive" src="@item.Images[0]" />
+                        @if (item.CurrentSale != null)
+                        {
+                            <span class="label label-danger sale-in-progress">Sale in progress</span>
+                        }
                     </td>
-                    <td>@Html.ActionLink(item.Name, "Edit")
-                    @if (item.CurrentSale == null)
-                    {
-                        <br /><a href="@Url.Action("LaunchSale", "Products", new { area = "Admin", id = item.ID })" class="btn btn-success">Launch Sale</a>
-                    }</td>   
+                    <td>
+                        @if (item.CurrentSale == null)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-warning pull-right" });
+                            @item.Name
+                            <br /><a href="@Url.Action("LaunchSale", "Products", new { area = "Admin", id = item.ID })" class="btn btn-success">Launch Sale</a>
+                        }
+                        else
+                        {
+                            @item.Name
+                        }
+                    </td>
                     <td>@string.Format("{0:c}", item.MSRP)</td>
                     <td>@string.Format("{0:c}", item.MinPrice)</td>
                     <td>@item.ItemsAvailable</td>
                 </tr>
             }
         </tbody>
-    </table> 
+    </table>
 }
