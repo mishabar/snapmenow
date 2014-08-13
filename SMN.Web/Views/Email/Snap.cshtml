@@ -6,8 +6,29 @@
 }
 
 <p>
-    You have just Snapped <a href="http://snapme.apphb.com/Sales/@Model["ID"]">@Model["Title"] at @string.Format("{0:c}", Model["Price"])</a>.<br/>
-    Once the sale is over, we will send you another email with the final price and payment instructions.
+    You have just Snapped <a href="http://snapme.apphb.com/Sales/@Model["ID"]">@Model["Title"]</a> at @string.Format("{0:c}", Model["Price"]) and secured yourself a great product.<br />
+    Once the sale is over, we will notify you with the closing price and checkout process instructions.
+</p>
+<p>
+    <img src="@Model["Image"]" style="width: 320px">
+</p>
+<p>
+    <div>
+        Retail Price: <span style="text-decoration:line-through; font-weight: bold;">@string.Format("{0:c}", Model["MSRP"])</span>
+    </div>
+    @if ((Model["EndsAt"] as DateTime?).HasValue)
+    {
+        DateTime endsAt = (Model["EndsAt"] as DateTime?).Value;
+        <div>
+            Ends At: <span style="font-weight: bold;">@endsAt.ToString("MMM dd, HH:mm")</span>
+        </div>
+    }
+    <div style="color: #5CB85C; font-size: 1.4em; font-weight: bold;">
+        Current Price: @string.Format("{0:c}", Model["Price"]) (-@Math.Round((decimal)Model["Discount"], 2)%)
+    </div>
+</p>
+<p>
+    While the sales is active and the price is going down, you can check it on the <a href="http://snapme.apphb.com/Sales/@Model["ID"]">sale page</a> or browse other quality products at great prices on out <a href="@Url.Action("Index", "Sales", new { }, Request.Url.Scheme)">Active Sales</a> page.
 </p>
 <p>
     Thanks,<br />

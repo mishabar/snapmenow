@@ -31,5 +31,10 @@ namespace SMN.Data.Repositories
             }
             return null;
         }
+
+        public Product Get(string id)
+        {
+            return _collection.FindOne(Query<Product>.EQ(p => p.ID, id));
+        }
     }
 }

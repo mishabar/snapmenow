@@ -10,7 +10,8 @@ using MongoDB.Driver.Builders;
 namespace MongoDB.AspNet.Identity
 {
     public class UserRepository<TUser> :
-        IUserLoginStore<TUser>, IUserEmailStore<TUser>, IUserClaimStore<TUser>, IUserRoleStore<TUser>, IUserPasswordStore<TUser>, IUserSecurityStampStore<TUser>, IUserStore<TUser>
+        IUserLoginStore<TUser>, IUserEmailStore<TUser>, IUserClaimStore<TUser>, IUserRoleStore<TUser>, IUserPasswordStore<TUser>,
+        IUserSecurityStampStore<TUser>, IUserStore<TUser>
         where TUser : IdentityUser
     {
         private MongoCollection<TUser> _collection;

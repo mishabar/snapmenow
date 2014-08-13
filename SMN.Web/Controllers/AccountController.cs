@@ -65,8 +65,15 @@ namespace SMN.Web.Controllers
                 //var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    if (user.EmailConfirmed)
+                    {
+                        await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please confirm your account before trying to log in.");
+                    }
                 }
                 else
                 {
@@ -99,18 +106,17 @@ namespace SMN.Web.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    //await SignInAsync(user, isPersistent: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     ViewRenderer renderer = new ViewRenderer();
-                    string body = renderer.RenderViewToString("~/Views/Email/Register.cshtml", new Dictionary<string, object> { { "Username", model.Email } });
+                    string body = renderer.RenderViewToString("~/Views/Email/Register.cshtml", new Dictionary<string, object> { { "Username", model.Email }, { "ConfirmAccountUrl", callbackUrl } });
                     await UserManager.EmailService.SendAsync(new IdentityMessage { Body = body, Destination = model.Email, Subject = "Welcome to Snap Me Now" });
-                    return RedirectToAction("Index", "Home");
+                    return View("DisplayEmail", user);
                 }
                 else
                 {
@@ -168,12 +174,15 @@ namespace SMN.Web.Controllers
                     return View();
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                ViewRenderer renderer = new ViewRenderer();
+                string body = renderer.RenderViewToString("~/Views/Email/ResetPassword.cshtml", new Dictionary<string, object> { { "ResetPasswordUrl", callbackUrl } });
+                await UserManager.EmailService.SendAsync(new IdentityMessage { Body = body, Destination = model.Email, Subject = "Snap Me Now - Reset Password" });
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -439,7 +448,7 @@ namespace SMN.Web.Controllers
                 }
                 else
                 {
-                    user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                    user = new ApplicationUser() { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
                     result = await UserManager.CreateAsync(user);
                     if (result.Succeeded || (user != null && !string.IsNullOrWhiteSpace(user.Id)))
                     {
@@ -447,7 +456,7 @@ namespace SMN.Web.Controllers
                         if (result.Succeeded)
                         {
                             ViewRenderer renderer = new ViewRenderer();
-                            string body = renderer.RenderViewToString("~/Views/Email/Register.cshtml", new Dictionary<string, object> { { "Username", user.UserName } });
+                            string body = renderer.RenderViewToString("~/Views/Email/RegisterWithExternal.cshtml", new Dictionary<string, object> { { "Username", user.UserName } });
                             await UserManager.EmailService.SendAsync(new IdentityMessage { Body = body, Destination = model.Email, Subject = "Welcome to Snap Me Now" });
 
                             await SignInAsync(user, isPersistent: false);

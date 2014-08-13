@@ -1,0 +1,50 @@
+﻿@model SMN.Web.Models.RetailerContactModel
+@{
+    ViewBag.Title = "Supplier Program";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Supplier / Retailer Program</h2>
+<hr />
+<h4>You got the goods. We can move it!</h4>
+<p style="margin-bottom: 14px;">
+    If you hit this page you already know there is a better way to move end of life stock in Australia. Snap Me Now provides outstanding value to consumers based on the demand your product attracts. We are working with quality brands; retailers, wholesalers and manufactures that can offer us bulk buying and high quality goods. We buy overstock, end of season, clearance stock and any goods that you want to Turn into Cash. Why staring at dead stock piling up and costing you storage space? Turn it into cash in your pocket. All stock gets dispatched from our warehouse facilities at Perth, WA, so you don't need to deal with anything. Once we have agreed on the price we will collect the goods from your premises.
+</p>
+<h4>Want to join our Supplier / Retailer Program?</h4>
+@if (string.IsNullOrWhiteSpace(Model.Status))
+{
+    <p>
+        To become a quality suppliers on Snap Me Now, please contact our sourcing team.
+        @using (Html.BeginForm("Retailer", "Home", new { Area = "" }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Name" })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-8">
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = 7, placeholder = "Few words about yourself" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-8 text-right">
+                    <button type="submit" class="btn btn-success">Send <i class="ti-email"></i></button>
+                </div>
+            </div>
+        }
+    </p>
+}
+else
+{
+    <p>Your message has been sent. <br />One of our representatives will contact you shortly.</p>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

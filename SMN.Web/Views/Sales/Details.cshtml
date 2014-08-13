@@ -8,7 +8,7 @@
 {
     <div class="toolbar">
         <div class="container">
-            <a href="@Url.Action("Index", "Sales")"><i class="ti-angle-left"></i> Back to Sales List</a>
+            <i class="ti-layout-grid2"></i> <a href="@Url.Action("Index", "Sales")">Back to Sales List</a>
         </div>
     </div>
 }
@@ -106,7 +106,7 @@
             }
             else
             {
-                <h4 class="text-center">
+                <h4 class="text-center" id="snapsCount">
                     @Model.Product.CurrentSale.Snaps @(Model.Product.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
                 </h4>
             }

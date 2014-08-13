@@ -5,11 +5,22 @@
 }
 
 <p>
-    @Model["Title"] sale has just ended. The final price is @string.Format("{0:c}", Model["Price"]).<br />
+    Congratulations! @Model["Title"] sale has just ended. The closing price is @string.Format("{0:c}", Model["Price"]).<br />
+    You have saved @string.Format("{0:c}", (float)Model["MSRP"] - (float)Model["Price"])! What a Snap!!!
+</p>
+<p>
+    <img src="@Model["Image"]" style="width: 320px">
+</p>
+<p>
+    <div style="color: #5CB85C; font-size: 1.4em; font-weight: bold;">
+        Closing Price: @string.Format("{0:c}", Model["Price"]) (-@Math.Round((decimal)Model["Discount"], 2)%)
+    </div>
+</p>
+<p>
     Please follow the instructions here to <a href="#">complete the checkout</a>.
 </p>
 <p>
-    Thanks,<br />
+    Thank you for your business,<br />
     Snap Me Now Team
 </p>
 

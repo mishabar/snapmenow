@@ -12,5 +12,7 @@ namespace SMN.Services
         IEnumerable<Tokens.ProductToken> GetAllForRetailer(string retailerEmail);
 
         void CreateProduct(Tokens.ProductToken token, HttpFileCollectionBase files);
+
+        Tokens.ProductToken Get(string id);
     }
 }

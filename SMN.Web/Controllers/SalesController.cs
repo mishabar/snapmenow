@@ -16,11 +16,13 @@ namespace SMN.Web.Controllers
         private static object _locker = new object();
         private ISalesService _salesService;
         private IEmailService _emailService;
+        private IProductsService _productService;
 
-        public SalesController(ISalesService salesService, IEmailService emailService)
+        public SalesController(ISalesService salesService, IEmailService emailService, IProductsService productService)
         {
             _salesService = salesService;
             _emailService = emailService;
+            _productService = productService;
         }
 
         // GET: Sales
@@ -31,6 +33,7 @@ namespace SMN.Web.Controllers
             return View(sales);
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Details(string id)
         {
             string email = null;
@@ -56,9 +59,17 @@ namespace SMN.Web.Controllers
                 SnapToken token = _salesService.SnapProduct(email, id, out saleIsOver);
                 if (token != null)
                 {
+                    ProductToken product = _productService.Get(id);
                     ViewRenderer renderer = new ViewRenderer();
                     string body = renderer.RenderViewToString("~/Views/Email/Snap.cshtml",
-                        new Dictionary<string, object> { { "Title", token.ProductName }, { "Price", token.Price }, { "ID", id } });
+                        new Dictionary<string, object> { 
+                        { "Title", token.ProductName }, 
+                        { "Price", token.Price }, 
+                        { "ID", id },
+                        { "EndsAt", product.CurrentSale == null ? new DateTime?() : new DateTime?(product.CurrentSale.EndsAt) },
+                        { "Image", product.Images[0] },
+                        { "MSRP", product.MSRP },
+                        { "Discount", (1M - (decimal)token.Price / (decimal)product.MSRP) * 100M }});
                     _emailService.Send(email, "You have just Snapped a " + token.ProductName, body);
 
                     if (saleIsOver)
@@ -69,9 +80,15 @@ namespace SMN.Web.Controllers
                             if (body == null)
                             {
                                 body = renderer.RenderViewToString("~/Views/Email/SaleEnded.cshtml",
-                                    new Dictionary<string, object> { { "Title", token.ProductName }, { "Price", snap.FinalPrice }, { "ID", snap.ID } });
+                                    new Dictionary<string, object> { 
+                                    { "Title", token.ProductName }, 
+                                    { "Price", snap.FinalPrice }, 
+                                    { "ID", snap.ID } ,
+                                    { "Image", product.Images[0] },
+                                    { "MSRP", product.MSRP },
+                                    { "Discount", (1M - (decimal)token.Price / (decimal)product.MSRP) * 100M }});
                             }
-                            _emailService.Send(email, token.ProductName + " the sale is over", body);
+                            _emailService.Send(email, token.ProductName + " sale has just ended", body);
                         }
                     }
                     return Redirect(Url.RouteUrl("SaleDetails", new { id = id }) + "?snapped=true");

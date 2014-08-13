@@ -178,6 +178,7 @@
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RetailerContactModel.cs" />
     <Compile Include="Models\SaleDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -277,6 +278,10 @@
     <Content Include="Views\Email\Snap.cshtml" />
     <Content Include="Views\Email\SaleEnded.cshtml" />
     <Content Include="Views\Account\History.cshtml" />
+    <Content Include="Views\Home\Retailer.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Email\ResetPassword.cshtml" />
+    <Content Include="Views\Email\RegisterWithExternal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

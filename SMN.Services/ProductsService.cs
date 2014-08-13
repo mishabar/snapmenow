@@ -27,5 +27,10 @@ namespace SMN.Services
         {
             Product product = _productsRepository.Create(token.AsProduct());
         }
+
+        public ProductToken Get(string id)
+        {
+            return _productsRepository.Get(id).AsToken(null);
+        }
     }
 }
