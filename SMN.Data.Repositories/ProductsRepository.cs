@@ -39,7 +39,7 @@ namespace SMN.Data.Repositories
 
         public void Update(Product product)
         {
-            Product currentState = _collection.FindOneById(product.ID);
+            Product currentState = _collection.FindOne(Query<Product>.EQ(p => p.ID, product.ID));
             if (currentState.CurrentSale != null)
                 throw new InvalidOperationException("Cannot update a Product during Active Sale");
 
