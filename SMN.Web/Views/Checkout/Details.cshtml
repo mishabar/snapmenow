@@ -1,0 +1,32 @@
+﻿@model SMN.Web.Models.CheckoutModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>1. Checkout - Snap Details<small class="pull-right">Step 1 of 4</small></h2>
+<hr />
+<div>
+    <table class="table checkout-step1">
+        <tbody>
+            <tr>
+                <td style="width: 30%;"><img src="@Model.Product.Images[0]" class="img-responsive" /></td>
+                <td>
+                    <h3>@Model.UserSnap.ProductName</h3>
+                    <div>Retail Price <strong style="text-decoration:line-through;">@string.Format("{0:c}", Model.Product.MSRP)</strong></div>
+                    <div>Snap Price <strong>@string.Format("{0:c}", Model.UserSnap.Price)</strong></div>
+                    <div>Final Price <strong>@string.Format("{0:c}", Model.UserSnap.FinalPrice)</strong></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form action="@Url.RouteUrl("Checkout", new { id = Model.UserSnap.ID })" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="step" value="@Model.Step" />
+                        <button type="submit" class="btn btn-success pull-right">Next <i class="ti-angle-right"></i></button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

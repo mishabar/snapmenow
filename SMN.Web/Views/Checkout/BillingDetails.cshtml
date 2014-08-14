@@ -1,0 +1,24 @@
+﻿@model SMN.Web.Models.BillingModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>3. Checkout - Billing Details<small class="pull-right">Step 3 of 4</small></h2>
+<hr />
+<div>
+    <form action="@Url.RouteUrl("Checkout", new { id = Model.ID })" method="post" class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="step" value="@Model.Step" />
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" name="action" value="prev" class="btn btn-success pull-left"><i class="ti-angle-left"></i> Back</button>
+                <button type="submit" name="action" value="next" class="btn btn-success pull-right">Next <i class="ti-angle-right"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -12,5 +12,7 @@ namespace SMN.Data.Repositories
         void Insert(UserSnap userSnap);
 
         IEnumerable<UserSnap> GetSaleSnaps(string saleID);
+
+        UserSnap Get(string userID, string id);
     }
 }

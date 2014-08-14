@@ -299,3 +299,18 @@ span.sale-in-progress {
     bottom: 5px;
     right: 2px;
 }
+
+.table-snap-history tbody tr {
+    height: 51px;
+}
+
+    .table-snap-history tbody tr td {
+        vertical-align: middle;
+    }
+
+table.checkout-step1 tbody tr td, table.checkout-step2 tbody tr td {
+    border: none;
+}
+table.checkout-step1 td div {
+    font-size: larger;
+}

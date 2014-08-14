@@ -1,0 +1,59 @@
+﻿@model SMN.Web.Models.AddressModel
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>2. Checkout - Address Details<small class="pull-right">Step 2 of 4</small></h2>
+<hr />
+<div>
+    <form action="@Url.RouteUrl("Checkout", new { id = Model.ID })" method="post" class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="step" value="@Model.Step" />
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.Address.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address.AddressLine1, new { @class = "col-md-2 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.Address.AddressLine1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address.AddressLine1, "", new { @class = "text-danger" })
+                <br />
+                @Html.TextBoxFor(m => m.Address.AddressLine2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address.State, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.Address.State, new SelectListItem[] { new SelectListItem { Text = "WA", Value = "WA" }}, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address.State, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(m => m.Address.ZipCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Address.ZipCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address.ZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address.Phone, new { @class = "col-md-2 control-label" })
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.Address.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" name="action" value="prev" class="btn btn-success pull-left"><i class="ti-angle-left"></i> Back</button>
+                <button type="submit" name="action" value="next" class="btn btn-success pull-right">Next <i class="ti-angle-right"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

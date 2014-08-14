@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RetailersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,8 +178,12 @@
     </Compile>
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\BillingModel.cs" />
+    <Compile Include="Models\CheckoutModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\RetailerContactModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SaleDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -283,6 +288,10 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Email\ResetPassword.cshtml" />
     <Content Include="Views\Email\RegisterWithExternal.cshtml" />
+    <Content Include="Views\Checkout\Details.cshtml" />
+    <Content Include="Views\Checkout\AddressDetails.cshtml" />
+    <Content Include="Views\Checkout\BillingDetails.cshtml" />
+    <Content Include="Views\Checkout\ReviewDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

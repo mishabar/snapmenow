@@ -21,7 +21,7 @@
 }
 else
 {
-    <table class="table table-condensed">
+    <table class="table table-snap-history">
         <thead>
             <tr>
                 <th>Name</th>
@@ -39,7 +39,15 @@ else
                     <td>@item.SnappedAt.ToString()</td>
                     <td>@string.Format("{0:c}", item.Price)</td>
                     <td>@string.Format("{0:c}", item.FinalPrice)</td>
-                    <td>@item.Status</td>
+                    @switch (item.Status)
+                    {
+                        case "Awaiting Checkout":
+                            <td><a class="btn btn-success" href="@Url.RouteUrl("Checkout", new { id = item.ID })">Checkout <i class="ti-angle-right"></i></a></td>
+                            break;
+                        default:
+                            <td>@item.Status</td>
+                            break;
+                    }
                 </tr>
             }
         </tbody>

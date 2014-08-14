@@ -31,5 +31,10 @@ namespace SMN.Data.Repositories
         {
             return _collection.Find(Query<UserSnap>.EQ(s => s.SaleID, saleID));
         }
+
+        public UserSnap Get(string userID, string id)
+        {
+            return _collection.FindOne(Query.And(Query<UserSnap>.EQ(s => s.UserID, userID), Query<UserSnap>.EQ(s => s.ID, id)));
+        }
     }
 }

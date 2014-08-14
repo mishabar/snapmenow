@@ -42,6 +42,7 @@ namespace SMN.Web
 
             builder.Register(c => new ProductsService(c.Resolve<IProductsRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new SalesService(c.Resolve<ISalesRepository>(), c.Resolve<IUserSnapsRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.Register(c => new CheckoutService(c.Resolve<IUserSnapsRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new SMN.Services.EmailService()).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             // build the dependencies

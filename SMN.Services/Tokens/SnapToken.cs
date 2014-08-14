@@ -17,6 +17,8 @@ namespace SMN.Services.Tokens
         public float FinalPrice { get; set; }
         public string SaleID { get; set; }
         public string Status { get; set; }
+        public string ProductID { get; set; }
+        public AddressToken Address { get; set; }
     }
 
     public static class SnapTokenExtensions
@@ -42,7 +44,9 @@ namespace SMN.Services.Tokens
                 SnappedAt = snap.SnappedAt,
                 FinalPrice = (float)snap.FinalPrice / (float)100,
                 ProductName = snap.ProductName,
-                Status = snap.Status
+                Status = snap.Status,
+                ProductID = snap.ProductID,
+                Address = snap.Address == null ? new AddressToken() : snap.Address.AsToken()
             };
         }
     }

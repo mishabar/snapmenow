@@ -17,6 +17,7 @@ namespace SMN.Data
         public string ProductName { get; set; }
         public string SaleID { get; set; }
         public string Status { get; set; }
+        public Address Address { get; set; }
 
         public UserSnap(Snap snap, string productName, string saleID, string status = "Snapped")
         {
