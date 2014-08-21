@@ -80,6 +80,7 @@ namespace SMN.Web.Areas.Admin.Controllers
             if (token.CurrentSale != null)
                 return RedirectToAction("Index");
 
+            token.Description = token.Description.Replace("<br/>", "\r\n");
             return View(token);
         }
 

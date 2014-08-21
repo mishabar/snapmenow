@@ -41,5 +41,17 @@ namespace SMN.Services.Tokens
                 Phone = address.Phone
             };
         }
+        public static Address AsAddress(this AddressToken address)
+        {
+            return new Address
+            {
+                Name = address.Name,
+                AddressLine1 = address.AddressLine1,
+                AddressLine2 = address.AddressLine2,
+                State = address.State,
+                ZipCode = address.ZipCode,
+                Phone = address.Phone
+            };
+        }
     }
 }

@@ -46,6 +46,10 @@ footer {
     border-radius: 0px;
 }
 
+.img-responsive {
+    width: 100%;
+}
+
 .footer-brand {
     color: #FFF;
 }
@@ -145,11 +149,12 @@ ul.nav.navbar-nav a {
     border-top: none;
 }
 
-td.sale-title {
+div.sale-title {
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 10px;
 }
 
 td.sale-end-date {
@@ -311,6 +316,27 @@ span.sale-in-progress {
 table.checkout-step1 tbody tr td, table.checkout-step2 tbody tr td {
     border: none;
 }
+
 table.checkout-step1 td div {
     font-size: larger;
+}
+
+::-webkit-input-placeholder {
+    color: #CCCCCC !important;
+}
+
+input:-moz-placeholder {
+    color: #CCCCCC !important;
+}
+
+input:-ms-placeholder {
+    color: #CCCCCC !important;
+}
+
+::-ms-input-placeholder {
+    color: #CCCCCC !important;
+}
+
+:-ms-input-placeholder {
+    color: #CCCCCC !important;
 }

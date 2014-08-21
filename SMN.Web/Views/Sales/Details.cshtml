@@ -20,19 +20,35 @@
                 <div id="images-carousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        @for (int i = 0; i < Model.Product.Images.Length; i++)
+                        @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
                         {
-                            <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                            <li data-target="#images-carousel" data-slide-to="0" class="active"></li>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.Product.Images.Length; i++)
+                            {
+                                <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                            }
                         }
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        @for (int i = 0; i < Model.Product.Images.Length; i++)
+                        @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
                         {
-                            <div class="item @(i == 0 ? "active" : "")">
-                                <img src="@Model.Product.Images[i]" />
+                            <div class="item active">
+                                <img src="~/Content/Images/no_image.jpg" />
                             </div>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.Product.Images.Length; i++)
+                            {
+                                <div class="item @(i == 0 ? "active" : "")">
+                                    <img src="@Model.Product.Images[i]" />
+                                </div>
+                            }
                         }
                     </div>
 
@@ -47,11 +63,14 @@
             </div>
         </div>
         <div class="more-images row">
-            @for (int i = 0; i < Model.Product.Images.Length; i++)
+            @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
             {
-                <div class="col-sm-2">
-                    <div class="img-thumbnail" style="background-image: url(@Model.Product.Images[i])" onclick="$('#images-carousel').carousel(@i)"></div>
-                </div>
+                for (int i = 0; i < Model.Product.Images.Length; i++)
+                {
+                    <div class="col-sm-2">
+                        <div class="img-thumbnail" style="background-image: url(@Model.Product.Images[i])" onclick="$('#images-carousel').carousel(@i)"></div>
+                    </div>
+                }
             }
         </div>
         <div class="description row">
@@ -116,9 +135,11 @@
             <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4>
         }
         <div class="text-center" style="margin-top: 30px;">
-            @*<div class="fb-share-button" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)" data-type="button_count" data-width="100px;"></div>*@
             <button type="button" class="btn btn-fbshare" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)"><i class="ti-facebook"></i></button>
-            <a target="_blank" href="http://pinterest.com/pin/create/link/?url=@Url.Encode(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath))&media=@Url.Encode(Model.Product.Images[0])&description=@Server.HtmlEncode(Model.Product.Name)" class="btn btn-default pin-it-button"><i class="ti-pinterest"></i></a>
+            @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
+            {
+                <a target="_blank" href="http://pinterest.com/pin/create/link/?url=@Url.Encode(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath))&media=@Url.Encode(Model.Product.Images[0])&description=@Server.HtmlEncode(Model.Product.Name)" class="btn btn-default pin-it-button"><i class="ti-pinterest"></i></a>
+            }
         </div>
     </div>
 </div>

@@ -59,6 +59,29 @@ namespace SMN.Web.Controllers
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             SnapToken snap = _checkoutService.GetSnap(email, id);
             ProductToken product = _productsService.Get(snap.ProductID);
+            InvoiceToken invoice = _checkoutService.GetOrCreateInvoice(snap);
+
+            // Save shipping address
+            if (ModelState.IsValid)
+            {
+                if (Request["action"] == "next")
+                {
+                    invoice.BillingAddress = new AddressToken
+                    {
+                        Name = Request["Address.Name"],
+                        AddressLine1 = Request["Address.AddressLine1"],
+                        AddressLine2 = Request["Address.AddressLine2"],
+                        State = Request["Address.State"],
+                        ZipCode = Request["Address.ZipCode"],
+                        Phone = Request["Address.Phone"]
+                    };
+                    _checkoutService.SaveInvoice(invoice);
+                }
+            }
+            else
+            {
+                return View("BillingDetails", new BillingModel { Step = 3, ID = id, ShippingAddress = invoice.ShippingAddress, Address = invoice.BillingAddress });
+            }
 
             return View("ReviewDetails", new ReviewModel { Step = 4, ID = id, UserSnap = snap, Product = product });
         }
@@ -68,6 +91,7 @@ namespace SMN.Web.Controllers
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             SnapToken snap = _checkoutService.GetSnap(email, id);
             ProductToken product = _productsService.Get(snap.ProductID);
+            InvoiceToken invoice = _checkoutService.GetOrCreateInvoice(snap);
 
             return View("Details", new CheckoutModel { Step = 1, UserSnap = snap, Product = product });
         }
@@ -76,16 +100,40 @@ namespace SMN.Web.Controllers
         {
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             SnapToken snap = _checkoutService.GetSnap(email, id);
+            InvoiceToken invoice = _checkoutService.GetOrCreateInvoice(snap);
 
-            return View("BillingDetails", new BillingModel { Step = 3, ID = id /*Billing = snap.Billing*/ });
+            // Save shipping address
+            if (ModelState.IsValid)
+            {
+                if (Request["action"] == "next")
+                {
+                    invoice.ShippingAddress = new AddressToken
+                    {
+                        Name = Request["Address.Name"],
+                        AddressLine1 = Request["Address.AddressLine1"],
+                        AddressLine2 = Request["Address.AddressLine2"],
+                        State = Request["Address.State"],
+                        ZipCode = Request["Address.ZipCode"],
+                        Phone = Request["Address.Phone"]
+                    };
+                    _checkoutService.SaveInvoice(invoice);
+                }
+            }
+            else
+            {
+                return View("AddressDetails", new AddressModel { Step = 2, ID = id, Address = invoice.ShippingAddress });
+            }
+
+            return View("BillingDetails", new BillingModel { Step = 3, ID = id, ShippingAddress = invoice.ShippingAddress, Address = invoice.BillingAddress });
         }
 
         private ActionResult AddressDetails(string id)
         {
             string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             SnapToken snap = _checkoutService.GetSnap(email, id);
+            InvoiceToken invoice = _checkoutService.GetOrCreateInvoice(snap);
 
-            return View("AddressDetails", new AddressModel { Step = 2, ID = id, Address = snap.Address });
+            return View("AddressDetails", new AddressModel { Step = 2, ID = id, Address = invoice.ShippingAddress });
         }
     }
 }

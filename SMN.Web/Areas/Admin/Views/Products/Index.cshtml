@@ -36,7 +36,14 @@ else
             {
                 <tr>
                     <td style="position: relative;">
-                        <img class="img-responsive" src="@item.Images[0]" />
+                        @if (item.Images == null || item.Images.Length == 0)
+                        {
+                            <img class="img-responsive" src="~/Content/Images/no_image.jpg" />
+                        }
+                        else
+                        {
+                            <img class="img-responsive" src="@item.Images[0]" />
+                        }
                         @if (item.CurrentSale != null)
                         {
                             <span class="label label-danger sale-in-progress">Sale in progress</span>
@@ -46,6 +53,8 @@ else
                         @if (item.CurrentSale == null)
                         {
                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-warning pull-right" });
+                            <span class="pull-right">&nbsp;</span>
+                            @Html.RouteLink("View on Site", "SaleDetails", new { id = item.ID }, new { target = "_blank", @class = "btn btn-sm btn-info pull-right" });
                             @item.Name
                             <br /><a href="@Url.Action("LaunchSale", "Products", new { area = "Admin", id = item.ID })" class="btn btn-success">Launch Sale</a>
                         }
