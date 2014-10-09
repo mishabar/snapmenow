@@ -26,6 +26,10 @@ footer {
     margin-bottom: 10px;
 }
 
+    .navbar ul.navbar-nav li {
+        padding: 0px 30px;
+    }
+
 .navbar-brand, .navbar-brand:hover, .footer-brand {
     font-family: 'Fira Sans';
     font-weight: bold;
@@ -33,6 +37,11 @@ footer {
     font-style: italic;
     color: #666;
 }
+
+    .navbar-brand img {
+        width: 48px;
+        margin-top: -13px;
+    }
 
 .navbar-toggle .icon-bar {
     background-color: #666;
@@ -340,3 +349,48 @@ input:-ms-placeholder {
 :-ms-input-placeholder {
     color: #CCCCCC !important;
 }
+
+.main-banner {
+    display: table;
+}
+
+    .main-banner > div {
+        background: url(https://issuestand.com/static/core/img/background_photo.jpg) no-repeat center top;
+        height: 640px;
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .main-banner h1 {
+        color: #FFF;
+        text-shadow: 2px 2px 2px #000;
+        font-size: 42px;
+        font-weight: bold;
+    }
+
+    .main-banner h3 {
+        color: #FFF;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    .main-banner h4 a {
+        color: #FFF;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+#learnmore p, #howitworks .col-md-3 {
+    font-size: 16px;
+}
+
+    #howitworks .col-md-3 p {
+        margin-top: 20px;
+    }
+
+.section {
+    margin: 40px auto;
+}
+
+    .section h2 {
+        margin-bottom: 30px;
+    }

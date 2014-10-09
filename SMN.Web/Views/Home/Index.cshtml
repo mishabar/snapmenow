@@ -3,73 +3,52 @@
     ViewBag.Description = "Snap Me Now allows customers to lower the price by Snapping a product. More Snaps - Lower the price goes. Discover new and exciting products every day.";
 }
 
-@section fullwidth_top
-{
-    <div class="top-banner embed-responsive">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="embed-responsive-item">
-                        <div style=" padding: 50px 0 0 50px">
-                            <h2>24 Hour Sales!</h2>
-                            <h2>Huge Savings! Snap Yours Now!</h2>
-                            <p style="margin-top: 20px;">
-                                <a class="btn btn-lg btn-success" id="registerLink" href="/Account/Register">Get Started Now <i class="ti-angle-right"></i></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
 
-<div class="row landing-page">
-    <div class="col-md-4">
-        <h2>Browse</h2>
-        <p class="text-center">Browse our <a href="@Url.Action("Index", "Sales")">active sales</a> page and enter a sale of a product you like.</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Snap and Share</h2>
-        <p class="text-center">Hit Snap Now to reserve a product and lower the price, then Share it with your friends.</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Checkout</h2>
-        <p class="text-center">Sit back and relax! Once a sale is over, you will be notified to complete the checkout.</p>
-    </div>
-</div>
-<p></p>
-<div class="row how-it-works">
-    <div class="col-xs-12 text-center">
-        <div>
-            <h3><span>How Does It Work?</span></h3>
-            <hr />
-        </div>
-        <div class="video">
-            <iframe width="640" height="360" src="//www.youtube.com/embed/0vrdgDdPApQ" frameborder="0" allowfullscreen></iframe>
-            <h3 class="text-center">
-                <a href="@Url.Action("FAQ", "Home")">Still have questions?</a>
-            </h3>
+<div class="row main-banner">
+    <div>
+        <h1 class="text-center">We are changing the game and we invite you to play</h1>
+        <h3 class="text-center">The Higher the demand, the Lower the price goes! Snap yours today!</h3>
+        <br />
+        <div class="text-center" style="margin-top: 40px;">
+            <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Start Snapping Now <i class="fa fa-angle-right"></i></a>
+            <h4>
+                <a class="inner-scroll" href="#learnmore">Learn more</a>
+            </h4>
         </div>
     </div>
 </div>
-<div class="row get-started">
-    <div class="col-xs-12 text-center">
-        <a class="btn btn-lg btn-success" id="registerLink" href="@Url.Action("Register", "Account", routeValues: null)">Get Started Now <i class="ti-angle-right"></i></a>
-    </div>
+<div id="learnmore" class="text-center section">
+    <h2>What is SnapMe?</h2>
+    <p>
+        SnapMe is a social shopping site which allows members to drop the price of a product they want by sharing it with their friends and raising the demand.
+    </p>
+    <hr />
 </div>
-<div class="clearfix"></div>
-
-<div class="modal fade" id="ft-modal" data-remote="@Url.Action("FirstTime", "Home")" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
+<div id="howitworks" class="text-center section">
+    <h2>How it works?</h2>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-3"><i class="fa fa-3x fa-laptop"></i><p>Browse our sales page and find a product you like</p></div>
+        <div class="col-md-3"><i class="fa fa-3x fa-shopping-cart"></i><p>Snap the item you like to drop the price</p></div>
+        <div class="col-md-3"><i class="fa fa-3x fa-share-alt"></i><p>Share with your friends to drop the price even more</p></div>
+        <div class="col-md-3"><i class="fa fa-3x fa-glass"></i><p>Wait until the end of the auction and follow the checkout instructions</p></div>
     </div>
+    <div class="clearfix"></div>
+    <hr />
+</div>
+<div class="text-center">
+    <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Register Now <i class="fa fa-angle-right"></i></a>
 </div>
 
 @section scripts
 {
     <script type="text/javascript">
+        $('.inner-scroll').click(function () {
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+            return false;
+        });
+
         if (typeof ($.cookie("smn.ft")) === "undefined") {
             $("#ft-modal").modal();
             $.cookie("smn.ft", (new Date()).getTime(), { expires: 365 });
