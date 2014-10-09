@@ -5,7 +5,7 @@
 }
 
 .body-content {
-    padding-bottom: 150px;
+    padding-bottom: 140px;
 }
 
 .btn, .panel-group .panel {
@@ -23,7 +23,7 @@ footer {
 }
 
 .navbar {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
     .navbar ul.navbar-nav li {
@@ -355,7 +355,6 @@ input:-ms-placeholder {
 }
 
     .main-banner > div {
-        background: url(https://issuestand.com/static/core/img/background_photo.jpg) no-repeat center top;
         height: 640px;
         width: 100%;
         display: table-cell;
@@ -387,9 +386,28 @@ input:-ms-placeholder {
         margin-top: 20px;
     }
 
-.section {
-    margin: 40px auto;
+#benefits ul {
+    list-style-type: none;
+    margin: 0px;
 }
+
+    #benefits ul li {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+.section {
+    padding: 40px 0px;
+    border-bottom: 1px solid#E7E7E7;
+}
+
+    .section:nth-child(odd) {
+        background-color: #FFF;
+    }
+
+    .section:nth-child(even) {
+        background-color: #F8F8F8;
+    }
 
     .section h2 {
         margin-bottom: 30px;

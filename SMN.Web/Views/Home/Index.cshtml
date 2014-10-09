@@ -3,7 +3,7 @@
     ViewBag.Description = "Snap Me Now allows customers to lower the price by Snapping a product. More Snaps - Lower the price goes. Discover new and exciting products every day.";
 }
 
-
+<div style="position: fixed; width: 100%; height: 100%; background:url(https://issuestand.com/static/core/img/background_photo.jpg) no-repeat center; z-index: -1; top: 0; right: 0; left: 0;"></div>
 <div class="row main-banner">
     <div>
         <h1 class="text-center">We are changing the game and we invite you to play</h1>
@@ -17,14 +17,13 @@
         </div>
     </div>
 </div>
-<div id="learnmore" class="text-center section">
+<div id="learnmore" class="text-center section row">
     <h2>What is SnapMe?</h2>
     <p>
         SnapMe is a social shopping site which allows members to drop the price of a product they want by sharing it with their friends and raising the demand.
     </p>
-    <hr />
 </div>
-<div id="howitworks" class="text-center section">
+<div id="howitworks" class="text-center section row">
     <h2>How it works?</h2>
     <div class="col-md-10 col-md-offset-1">
         <div class="col-md-3"><i class="fa fa-3x fa-laptop"></i><p>Browse our sales page and find a product you like</p></div>
@@ -33,9 +32,17 @@
         <div class="col-md-3"><i class="fa fa-3x fa-glass"></i><p>Wait until the end of the auction and follow the checkout instructions</p></div>
     </div>
     <div class="clearfix"></div>
-    <hr />
 </div>
-<div class="text-center">
+<div id="benefits" class="text-center section row">
+    <h2>Why Register?</h2>
+    <ul>
+        <li>It's FREE, so you have nothing to lose</li>
+        <li>Pay less for things you want</li>
+        <li>Early snappers get additional 5% discount on checkout</li>
+        <li>Coming soon - Missed a sale? We will notify you the next time this product is on sale.</li>
+    </ul>
+</div>
+<div class="section text-center row">
     <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Register Now <i class="fa fa-angle-right"></i></a>
 </div>
 
