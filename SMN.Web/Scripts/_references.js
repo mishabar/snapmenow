@@ -8,3 +8,4 @@
 /// <reference path="sales.js" />
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="jquery.validate.unobtrusive.min.js" />
+/// <reference path="flipclock.min.js" />

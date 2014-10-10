@@ -2,8 +2,7 @@
 @model ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Use another service to log in</h4>
-<hr />
+<h2>Preregister now</h2>
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0)
@@ -29,3 +28,12 @@
         }
     }
 }
+<h3>and we will send you an email once we will go live</h3>
+@*<div class="row">
+    <div class="col-md-2"><img class="img-responsive" src="~/Content/Images/beats.jpg" /></div>
+    <div class="col-md-2"><img class="img-responsive" src="~/Content/Images/Bose.png" /></div>
+    <div class="col-md-2"><img class="img-responsive" src="" /></div>
+    <div class="col-md-2"><img class="img-responsive" src="" /></div>
+    <div class="col-md-2"><img class="img-responsive" src="" /></div>
+    <div class="col-md-2"><img class="img-responsive" src="" /></div>
+</div>*@

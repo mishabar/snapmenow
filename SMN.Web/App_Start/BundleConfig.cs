@@ -28,6 +28,7 @@ namespace SMN.Web
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/themify-icons.css",
+                      "~/Content/flipclock.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

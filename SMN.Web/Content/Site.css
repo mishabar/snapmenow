@@ -13,7 +13,7 @@
 }
 
 footer {
-    background-color: #5BCF6C;
+    background-color: #6BB933;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -278,6 +278,8 @@ td.sale-end-date {
     background-color: #4E69A2;
     border-color: #435A8B #3C5488 #334C83;
     color: #FFF;
+    font-size: 32px;
+    margin: 40px auto;
 }
 
 #externalLogins .table > tbody > tr > td {
@@ -355,7 +357,7 @@ input:-ms-placeholder {
 }
 
     .main-banner > div {
-        height: 640px;
+        height: 740px;
         width: 100%;
         display: table-cell;
         vertical-align: middle;
@@ -412,3 +414,9 @@ input:-ms-placeholder {
     .section h2 {
         margin-bottom: 30px;
     }
+
+
+.btn-success {
+    background-color: #6BB933;
+    border-color: #60A62E #519F18 #409701;
+}

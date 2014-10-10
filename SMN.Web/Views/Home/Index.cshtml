@@ -10,10 +10,13 @@
         <h3 class="text-center">The Higher the demand, the Lower the price goes! Snap yours today!</h3>
         <br />
         <div class="text-center" style="margin-top: 40px;">
-            <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Start Snapping Now <i class="fa fa-angle-right"></i></a>
+            <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Preregister Now <i class="fa fa-angle-right"></i></a>
             <h4>
                 <a class="inner-scroll" href="#learnmore">Learn more</a>
             </h4>
+        </div>
+        <div class="text-center">
+            <div class="clock"></div>
         </div>
     </div>
 </div>
@@ -43,11 +46,12 @@
     </ul>
 </div>
 <div class="section text-center row">
-    <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Register Now <i class="fa fa-angle-right"></i></a>
+    <a class="btn btn-lg btn-success" href="@Url.Action("Register", "Account")">Preregister Now <i class="fa fa-angle-right"></i></a>
 </div>
 
 @section scripts
 {
+    <script src="~/Scripts/flipclock.min.js"></script>
     <script type="text/javascript">
         $('.inner-scroll').click(function () {
             $('html, body').animate({
@@ -60,5 +64,10 @@
             $("#ft-modal").modal();
             $.cookie("smn.ft", (new Date()).getTime(), { expires: 365 });
         }
+
+        var clock = $('.clock').FlipClock(@(new DateTime(2014,12,1).Subtract(DateTime.Now).TotalSeconds), {
+            clockFace: 'DailyCounter',
+            countdown: true
+        });
     </script>
 }
