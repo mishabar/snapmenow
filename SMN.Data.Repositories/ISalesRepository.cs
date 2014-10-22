@@ -17,5 +17,7 @@ namespace SMN.Data.Repositories
         bool StartSale(string productId);
 
         Sale GetSale(string saleID);
+
+        IEnumerable<Product> GetUpcoming();
     }
 }

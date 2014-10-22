@@ -33,13 +33,21 @@ namespace SMN.Web.Controllers
             return View(sales);
         }
 
+        // GET: Soon
+        public ActionResult Soon()
+        {
+            IEnumerable<ProductToken> sales = _salesService.GetUpcomingSales();
+
+            return View(sales);
+        }
+
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Details(string id)
         {
             string email = null;
             if (User.Identity.IsAuthenticated)
             {
-                email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
+                email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Name).Value;
             }
             ProductToken product = _salesService.GetActiveSale(id, email);
 
@@ -52,7 +60,7 @@ namespace SMN.Web.Controllers
         [Authorize]
         public ActionResult Snap(string id)
         {
-            string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
+            string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Name).Value;
             lock (_locker)
             {
                 bool saleIsOver = false;

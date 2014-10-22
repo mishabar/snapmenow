@@ -19,12 +19,14 @@ namespace SMN.Data
         public string Description { get; set; }
         public string[] Images { get; set; }
         public int MSRP { get; set; }
+        public int BuyPrice { get; set; }
         public int MinPrice { get; set; }
         public int ItemsAvailable { get; set; }
         [BsonIgnoreIfNull]
         public Sale CurrentSale { get; set; }
         public int SnapPrice { get; set; }
         public float Rank { get; set; }
+        public Schedule Schedule { get; set; }
 
         public Product()
         {

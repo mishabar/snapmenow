@@ -20,5 +20,7 @@ namespace SMN.Services
         IEnumerable<SnapToken> GetUserSnaps(string email);
 
         IEnumerable<SnapToken> GetSaleSnaps(string saleID);
+
+        IEnumerable<ProductToken> GetUpcomingSales();
     }
 }

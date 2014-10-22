@@ -41,7 +41,7 @@ namespace SMN.Web
             builder.Register(c => new UserSnapsRepository(c.Resolve<MongoDatabase>())).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new InvoicesRepository(c.Resolve<MongoDatabase>())).AsImplementedInterfaces().InstancePerLifetimeScope();
 
-            builder.Register(c => new ProductsService(c.Resolve<IProductsRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.Register(c => new ProductsService(c.Resolve<IProductsRepository>(), null)).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new SalesService(c.Resolve<ISalesRepository>(), c.Resolve<IUserSnapsRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new CheckoutService(c.Resolve<IUserSnapsRepository>(), c.Resolve<IInvoicesRepository>())).AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.Register(c => new SMN.Services.EmailService()).AsImplementedInterfaces().InstancePerLifetimeScope();

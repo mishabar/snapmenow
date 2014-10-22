@@ -11,6 +11,9 @@ namespace SMN.Data.Repositories
         IEnumerable<Product> FindAllForRetailer(string retailerEmail);
         Product Create(Product product);
         Product Get(string id);
-        void Update(Product product);
+        void Update(Product product, string email);
+        void UpdateImage(string id, int i, string url);
+        string[] Delete(string id, string email);
+        void ScheduleSale(string id, DateTime start_on, bool start_now, int duration, int items, string email);
     }
 }

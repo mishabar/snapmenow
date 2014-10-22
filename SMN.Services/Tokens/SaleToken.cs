@@ -8,6 +8,7 @@ namespace SMN.Services.Tokens
 {
     public class SaleToken
     {
+        public int Items { get; set; }
         public DateTime EndsAt { get; set; }
         public float CurrentPrice { get; set; }
         public float Discount { get; set; }

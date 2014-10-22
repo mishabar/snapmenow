@@ -14,15 +14,22 @@ namespace SMN.Services.Tokens
         [Required]
         public string Email { get; set; }
         [Required]
+        [MaxLength(15)]
         public string SKU { get; set; }
         [Required]
+        [MaxLength(100)]
         public string Name { get; set; }
         [Required]
+        [MaxLength(1024)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public string[] Images { get; set; }
         [Required]
         [Range(0, 10000)]
         public float MSRP { get; set; }
+        [Required]
+        [Range(0, 10000)]
+        public float BuyPrice { get; set; }
         [Required]
         [Range(0, 10000)]
         [Display(Name = "Minimum Price")]
@@ -37,6 +44,7 @@ namespace SMN.Services.Tokens
         public int SnapPrice { get; set; }
         public SaleToken CurrentSale { get; set; }
         public SnapToken MySnap { get; set; }
+        public Schedule Schedule { get; set; }
     }
 
     public static class ProductTokenExtensions 
@@ -49,12 +57,14 @@ namespace SMN.Services.Tokens
                 Email = product.Email,
                 SKU = product.SKU,
                 Name = product.Name,
-                Description = product.Description.Replace(Environment.NewLine, "<br/>"),
+                Description = product.Description,
                 Images = product.Images,
                 MSRP = (float)product.MSRP / (float)100,
+                BuyPrice =(float)product.BuyPrice / (float)100,
                 MinPrice = (float)product.MinPrice / (float)100,
                 ItemsAvailable = product.ItemsAvailable,
                 SnapPrice = product.SnapPrice,
+                Schedule = product.Schedule,
                 CurrentSale = product.CurrentSale == null ? null : new SaleToken 
                 {
                     CurrentPrice = (float)product.CurrentSale.CurrentPrice / (float)100,
@@ -75,8 +85,9 @@ namespace SMN.Services.Tokens
                 SKU = token.SKU,
                 Name = token.Name,
                 Description = token.Description,
-                Images = token.Images,
+                Images = token.Images ?? new string[5],
                 MSRP = (int)(token.MSRP * 100),
+                BuyPrice = (int)(token.BuyPrice * 100),
                 MinPrice = (int)(token.MinPrice * 100),
                 ItemsAvailable = token.ItemsAvailable,
                 SnapPrice = token.SnapPrice

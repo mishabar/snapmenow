@@ -89,5 +89,11 @@ namespace SMN.Data.Repositories
         {
             return _salesCollection.FindOne(Query<Sale>.EQ(s => s.ID, saleID));
         }
+
+
+        public IEnumerable<Product> GetUpcoming()
+        {
+            return _productsCollection.Find(Query<Product>.NE(p => p.Schedule, null));
+        }
     }
 }

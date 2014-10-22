@@ -89,5 +89,11 @@ namespace SMN.Services
         {
             return _userSnapsRepository.GetSaleSnaps(saleID).Select(s => s.AsToken());
         }
+
+
+        public IEnumerable<ProductToken> GetUpcomingSales()
+        {
+            return _salesRepository.GetUpcoming().Select(p => p.AsToken(null));
+        }
     }
 }

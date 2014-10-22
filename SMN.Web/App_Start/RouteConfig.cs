@@ -21,6 +21,13 @@ namespace SMN.Web
             );
 
             routes.MapRoute(
+                name: "SaleSoon",
+                url: "Sales/Soon",
+                namespaces: new string[] { "SMN.Web.Controllers" },
+                defaults: new { controller = "Sales", action = "Soon" }
+            );
+
+            routes.MapRoute(
                 name: "SaleDetails",
                 url: "Sales/{id}",
                 namespaces: new string[] { "SMN.Web.Controllers" },
