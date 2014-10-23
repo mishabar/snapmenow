@@ -43,8 +43,8 @@ namespace SMN.Data.Repositories
             if (item == null || (item.Email != email && email != ""))
                 throw new UnauthorizedAccessException("Unauthorized");
 
-            if (item.CurrentSale != null)
-                throw new InvalidOperationException("Cannot update a Product during Active Sale");
+            //if (item.CurrentSale != null)
+            //    throw new InvalidOperationException("Cannot update a Product during Active Sale");
 
             _collection.Update(Query<Product>.EQ(p => p.ID, product.ID),
                 Update<Product>.Set(p => p.Name, product.Name).Set(p => p.Description, product.Description)
