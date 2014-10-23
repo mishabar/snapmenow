@@ -26,12 +26,11 @@
 @section scripts
 {
     <script type="text/javascript">
-        updatePrices(5000);
         $(window).on("resize", resize);
 
         function resize() {
             $(".embed-responsive.embed-responsive-16by9").each(function (i, item) {
-                $("img", this).height($(this).height() + 'px');
+                $("img", this).height($(this).css("padding").split(' ')[2]);
 
             });
         }
