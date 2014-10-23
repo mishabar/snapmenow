@@ -13,143 +13,145 @@
     </div>
 }
 
-<div class="row sale-details" data-status="@(Model.Product.CurrentSale == null ? "inactive" : "active")">
-    <div class="col-md-8">
-        <div class="embed-responsive embed-responsive-16by9">
-            <div class="embed-responsive-item" style="border: 1px solid #DDD;overflow: hidden;max-height: 100%;">
-                <div id="images-carousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
-                        {
-                            <li data-target="#images-carousel" data-slide-to="0" class="active"></li>
-                        }
-                        else
-                        {
-                            for (int i = 0; i < Model.Product.Images.Length; i++)
+<div class="container">
+    <div class="row sale-details" data-status="@(Model.Product.CurrentSale == null ? "inactive" : "active")">
+        <div class="col-md-8">
+            <div class="embed-responsive embed-responsive-16by9">
+                <div class="embed-responsive-item" style="border: 1px solid #DDD;overflow: hidden;max-height: 100%;">
+                    <div id="images-carousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
                             {
-                                if (!string.IsNullOrEmpty(Model.Product.Images[i]))
+                                <li data-target="#images-carousel" data-slide-to="0" class="active"></li>
+                            }
+                            else
+                            {
+                                for (int i = 0; i < Model.Product.Images.Length; i++)
                                 {
-                                    <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                    if (!string.IsNullOrEmpty(Model.Product.Images[i]))
+                                    {
+                                        <li data-target="#images-carousel" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+                                    }
                                 }
                             }
-                        }
-                    </ol>
+                        </ol>
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
-                        {
-                            <div class="item active">
-                                <img src="~/Content/Images/no_image.jpg" />
-                            </div>
-                        }
-                        else
-                        {
-                            for (int i = 0; i < Model.Product.Images.Length; i++)
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            @if (Model.Product.Images == null || Model.Product.Images.Length == 0)
                             {
-                                if (!string.IsNullOrEmpty(Model.Product.Images[i]))
+                                <div class="item active">
+                                    <img src="~/Content/Images/no_image.jpg" />
+                                </div>
+                            }
+                            else
+                            {
+                                for (int i = 0; i < Model.Product.Images.Length; i++)
                                 {
-                                    <div class="item @(i == 0 ? "active" : "")">
-                                        <img src="@Model.Product.Images[i]" />
-                                    </div>
+                                    if (!string.IsNullOrEmpty(Model.Product.Images[i]))
+                                    {
+                                        <div class="item @(i == 0 ? "active" : "")">
+                                            <img src="@Model.Product.Images[i]" />
+                                        </div>
+                                    }
                                 }
                             }
-                        }
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
                     </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#images-carousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#images-carousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
                 </div>
             </div>
-        </div>
-        <div class="more-images row">
-            @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
-            {
-                for (int i = 0; i < Model.Product.Images.Length; i++)
+            <div class="more-images row">
+                @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
                 {
-                    <div class="col-sm-2">
-                        <div class="img-thumbnail" style="background-image: url(@Model.Product.Images[i])" onclick="$('#images-carousel').carousel(@i)"></div>
-                    </div>
+                    for (int i = 0; i < Model.Product.Images.Length; i++)
+                    {
+                        <div class="col-sm-2">
+                            <div class="img-thumbnail" style="background-image: url(@Model.Product.Images[i])" onclick="$('#images-carousel').carousel(@i)"></div>
+                        </div>
+                    }
                 }
-            }
-        </div>
-        <div class="description row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Description</strong></div>
-                    <div class="panel-body">
-                        @Html.Raw(Model.Product.Description)
+            </div>
+            <div class="description row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Description</strong></div>
+                        <div class="panel-body">
+                            @Html.Raw(Model.Product.Description)
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <h2>@Model.Product.Name</h2>
-        <div class="msrp">
-            <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.Product.MSRP)</span></div>
+        <div class="col-md-4">
+            <h2>@Model.Product.Name</h2>
+            <div class="msrp">
+                <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.Product.MSRP)</span></div>
+                @if (Model.Product.CurrentSale != null)
+                {
+                    <div>Ends At: <strong>@Model.Product.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
+                    <div class="discount">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice) (-@Math.Round(Model.Product.CurrentSale.Discount, 2)%)</div>
+                }
+                else if (Model.Product.Schedule != null)
+                {
+                    <div>Starts On: <strong>@Model.Product.Schedule.StartOn.ToString("MMM dd, HH:mm")</strong></div>
+                }
+            </div>
             @if (Model.Product.CurrentSale != null)
             {
-                <div>Ends At: <strong>@Model.Product.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
-                <div class="discount">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice) (-@Math.Round(Model.Product.CurrentSale.Discount, 2)%)</div>
-            }
-            else if (Model.Product.Schedule != null)
-            {
-                <div>Starts On: <strong>@Model.Product.Schedule.StartOn.ToString("MMM dd, HH:mm")</strong></div>
-            }
-        </div>
-        @if (Model.Product.CurrentSale != null)
-        {
-            <p>
-                @if (Request.IsAuthenticated)
-                {
-                    if (Model.Product.MySnap == null)
+                <p>
+                    @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
+                        if (Model.Product.MySnap == null)
                         {
-                            <input type="hidden" name="id" value="@Model.Product.ID" />
-                            <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</button>
+                            using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@Model.Product.ID" />
+                                <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</button>
+                            }
+                        }
+                        else
+                        {
+                            <h3 class="text-center isnapped">You have Snapped this product @@ @string.Format("{0:c}", Model.Product.MySnap.Price)</h3>
                         }
                     }
                     else
                     {
-                        <h3 class="text-center isnapped">You have Snapped this product @@ @string.Format("{0:c}", Model.Product.MySnap.Price)</h3>
+                        <a class="btn btn-lg btn-success btn-block btn-snapme" href="@Url.Action("Login", "Account", new { Area = "", ReturnUrl = Request.Url.PathAndQuery })">Login or Register to Snap</a>
                     }
+                </p>
+                if (Model.Product.CurrentSale.Snaps == 0)
+                {
+                    <p class="text-center">
+                        No Snaps yet. Be the first to Snap and get additional 5% discount at Checkout!
+                    </p>
                 }
                 else
                 {
-                    <a class="btn btn-lg btn-success btn-block btn-snapme" href="@Url.Action("Login", "Account", new { Area = "", ReturnUrl = Request.Url.PathAndQuery })">Login or Register to Snap</a>
+                    <h4 class="text-center" id="snapsCount">
+                        @Model.Product.CurrentSale.Snaps @(Model.Product.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
+                    </h4>
                 }
-            </p>
-            if (Model.Product.CurrentSale.Snaps == 0)
-            {
-                <p class="text-center">
-                    No Snaps yet. Be the first to Snap and get additional 5% discount at Checkout!
-                </p>
             }
             else
             {
-                <h4 class="text-center" id="snapsCount">
-                    @Model.Product.CurrentSale.Snaps @(Model.Product.CurrentSale.Snaps == 1 ? "item was" : "items were") snapped!
-                </h4>
+                <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4>
             }
-        }
-        else
-        {
-            <h4 class="text-justify">This product is currently not on sale or the sale ended.</h4>
-        }
-        <div class="text-center" style="margin-top: 30px;">
-            <button type="button" class="btn btn-fbshare" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)"><i class="ti-facebook"></i></button>
-            @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
-            {
-                <a target="_blank" href="http://pinterest.com/pin/create/link/?url=@Url.Encode(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath))&media=@Url.Encode(Model.Product.Images[0])&description=@Server.HtmlEncode(Model.Product.Name)" class="btn btn-default pin-it-button"><i class="ti-pinterest"></i></a>
-            }
+            <div class="text-center" style="margin-top: 30px;">
+                <button type="button" class="btn btn-fbshare" data-href="@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath)"><i class="ti-facebook"></i></button>
+                @if (Model.Product.Images != null && Model.Product.Images.Length > 0)
+                {
+                    <a target="_blank" href="http://pinterest.com/pin/create/link/?url=@Url.Encode(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.Url.AbsolutePath))&media=@Url.Encode(Model.Product.Images[0])&description=@Server.HtmlEncode(Model.Product.Name)" class="btn btn-default pin-it-button"><i class="ti-pinterest"></i></a>
+                }
+            </div>
         </div>
     </div>
 </div>
