@@ -423,3 +423,8 @@ input:-ms-placeholder {
     background-color: #6BB933;
     border-color: #60A62E #519F18 #409701;
 }
+
+.embed-responsive.embed-responsive-16by9 .img-responsive {
+    margin: 0px auto;
+    width: auto;
+}
