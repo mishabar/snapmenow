@@ -47,7 +47,7 @@ namespace SMN.Web.Controllers
             string email = null;
             if (User.Identity.IsAuthenticated)
             {
-                email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Name).Value;
+                email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             }
             ProductToken product = _salesService.GetActiveSale(id, email);
 
@@ -60,7 +60,7 @@ namespace SMN.Web.Controllers
         [Authorize]
         public ActionResult Snap(string id)
         {
-            string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Name).Value;
+            string email = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.Email).Value;
             lock (_locker)
             {
                 bool saleIsOver = false;
