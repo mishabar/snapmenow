@@ -15,7 +15,7 @@
 
 <div class="container">
     <div class="row sale-details" data-status="@(Model.Product.CurrentSale == null ? "inactive" : "active")">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="embed-responsive embed-responsive-16by9">
                 <div class="embed-responsive-item" style="border: 1px solid #DDD;overflow: hidden;max-height: 100%;">
                     <div id="images-carousel" class="carousel slide" data-ride="carousel">
@@ -91,19 +91,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <h2>@Model.Product.Name</h2>
             <div class="msrp">
                 <div>Retail Price: <span style="text-decoration: line-through; font-weight: bold;">@string.Format("{0:c}", Model.Product.MSRP)</span></div>
                 @if (Model.Product.CurrentSale != null)
                 {
                     <div>Ends At: <strong>@Model.Product.CurrentSale.EndsAt.ToString("MMM dd, HH:mm")</strong></div>
-                    <div class="discount">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice) (-@Math.Round(Model.Product.CurrentSale.Discount, 2)%)</div>
+                    @*<div class="discount">Current Price: @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice) (-@Math.Round(Model.Product.CurrentSale.Discount, 2)%)</div>*@
                 }
                 else if (Model.Product.Schedule != null)
                 {
                     <div>Starts On: <strong>@Model.Product.Schedule.StartOn.ToString("MMM dd, HH:mm")</strong></div>
                 }
+                <div class="price-counter">
+                    <div class="counter"></div>
+                    <div class="decimal-point"></div>
+                    <div class="counter"></div>
+                </div>
             </div>
             @if (Model.Product.CurrentSale != null)
             {
@@ -159,7 +164,32 @@
 @section scripts
 {
     <script type="text/javascript" src="~/Scripts/sales.js"></script>
+    <script src="~/Scripts/flipclock.min.js"></script>
     <script type="text/javascript">
-        updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
+        var currentPrice = @(Model.Product.CurrentSale != null ? string.Format("[{0},{1}]", Model.Product.CurrentSale.CurrentPrice.ToString("f").Split('.')) : string.Format("[{0},{1}]", Model.Product.MSRP.ToString("f").Split('.')));
+        var clocks = [];
+        $('.counter').each(function(i, item){
+            clocks[i] = $(item).FlipClock(currentPrice[i], {
+                clockFace: 'Counter'
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        //updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
+        setInterval(updateCounter, 1000);
+
+        function updateCounter(){
+            if (currentPrice[0] < clocks[0].getTime().time){
+                if (clocks[1].getTime().time > 0) { 
+                    clocks[1].decrement();
+                } else {
+                    clocks[0].decrement();
+                    clocks[1].setValue(99);
+                }
+            } else if (currentPrice[1] < clocks[1].getTime().time){
+                clocks[1].decrement();
+            }
+        }
     </script>
 }
