@@ -176,7 +176,7 @@
     </script>
 
     <script type="text/javascript">
-        //updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
+        updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
         setInterval(updateCounter, 1000);
 
         function updateCounter(){

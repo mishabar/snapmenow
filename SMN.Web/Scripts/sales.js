@@ -10,7 +10,7 @@
             }
         }
         setTimeout(updatePrice, interval, id, loggedIn, interval);
-        response.price.match(/\d+/).each(function (i, v) { currentPrice[i] = parseInt(v) });
+        $(response.price.match(/\d+/)).each(function (i, v) { currentPrice[i] = parseInt(v) });
     });
 }
 
