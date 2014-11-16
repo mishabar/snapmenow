@@ -120,12 +120,12 @@
                             using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
                             {
                                 <input type="hidden" name="id" value="@Model.Product.ID" />
-                                <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now @@ @string.Format("{0:c}", Model.Product.CurrentSale.CurrentPrice)</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now</button>
                             }
                         }
                         else
                         {
-                            <h3 class="text-center isnapped">You have Snapped this product @@ @string.Format("{0:c}", Model.Product.MySnap.Price)</h3>
+                            <h3 class="text-center isnapped">You Have Snapped This Product</h3>
                         }
                     }
                     else

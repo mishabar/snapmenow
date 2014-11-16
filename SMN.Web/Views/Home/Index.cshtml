@@ -10,7 +10,7 @@
         <h3 class="text-center">The Higher the demand, the Lower the price goes! Snap yours today!</h3>
         <br />
         <div class="text-center" style="margin-top: 40px;">
-            <a class="btn btn-lg btn-success" href="#" onclick="document.getElementById('preregisterForm').submit();">Preregister Now with Facebook <i class="fa fa-angle-right"></i></a>
+            <a class="btn btn-lg btn-success" href="/Account/Register">Register Now <i class="fa fa-angle-right"></i></a>
             <h4>
                 <a class="inner-scroll" href="#learnmore">Learn more</a>
             </h4>
@@ -44,15 +44,9 @@
         <li>Early snappers get additional 5% discount on checkout</li>
         <li>Coming soon - Missed a sale? We will notify you the next time this product is on sale.</li>
     </ul>
+    <br /><br />
+    <a class="btn btn-lg btn-success" href="/Account/Register">Register Now <i class="fa fa-angle-right"></i></a>
 </div>
-<div class="section text-center row">
-    <a class="btn btn-lg btn-success" href="#" onclick="document.getElementById('preregisterForm').submit();">Preregister Now  with Facebook <i class="fa fa-angle-right"></i></a>
-</div>
-
-<form action="/Account/ExternalLogin?ReturnUrl=%2FHome%2FIndex" method="post" id="preregisterForm">
-    @Html.AntiForgeryToken()
-    <input type="hidden" value="Facebook" name="provider" />
-</form>
 
 @section scripts
 {

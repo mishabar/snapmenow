@@ -50,13 +50,13 @@ namespace SMN.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            var fbOptions = new FacebookAuthenticationOptions
-            {
-                AppId = "472333879576868",
-                AppSecret = "5bdbe4876747ec03fa85a807cd632c1d"
-            };
-            fbOptions.Scope.Add("email");
-            app.UseFacebookAuthentication(fbOptions);
+            //var fbOptions = new FacebookAuthenticationOptions
+            //{
+            //    AppId = "472333879576868",
+            //    AppSecret = "5bdbe4876747ec03fa85a807cd632c1d"
+            //};
+            //fbOptions.Scope.Add("email");
+            //app.UseFacebookAuthentication(fbOptions);
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

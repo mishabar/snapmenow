@@ -430,14 +430,15 @@ input:-ms-placeholder {
     width: auto;
 }
 
-.price-counter .counter{
+.price-counter .counter {
     margin-top: 0;
 }
+
 .decimal-point {
     display: inline-block;
     background: #323434;
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
@@ -445,3 +446,20 @@ input:-ms-placeholder {
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+
+
+.price-counter .flip-clock-wrapper ul {
+    width: 30px;
+    height: 45px;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 44px;
+}
+
+    .price-counter .flip-clock-wrapper ul li {
+        line-height: 44px;
+    }
+
+        .price-counter .flip-clock-wrapper ul li a div div.inn {
+            font-size: 35px;
+        }
