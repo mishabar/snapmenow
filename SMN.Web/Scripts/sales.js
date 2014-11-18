@@ -3,10 +3,9 @@
         if ($("div.sale-details").data("status") != response.status) {
             document.location.reload();
         } else {
-            //$("div.discount").html("Current Price: " + response.price + " (-" + response.discount + ")");
             $("#snapsCount").html((response.snaps == 1 ? "1 item was" : response.snaps +" items were") + " snapped!");
             if (loggedIn){
-                $(".btn-snapme").html("<i class=\"ti-shopping-cart\"></i> Snap Me Now @ " + response.price);
+                $(".btn-snapme").html("Snap Me Now");
             }
         }
         setTimeout(updatePrice, interval, id, loggedIn, interval);

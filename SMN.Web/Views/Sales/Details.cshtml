@@ -120,7 +120,7 @@
                             using (Html.BeginForm("Snap", "Sales", new { }, FormMethod.Post))
                             {
                                 <input type="hidden" name="id" value="@Model.Product.ID" />
-                                <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme"><i class="ti-shopping-cart"></i> Snap Me Now</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block btn-snapme">Snap Me Now</button>
                             }
                         }
                         else
@@ -177,7 +177,7 @@
 
     <script type="text/javascript">
         updatePrice('@Model.Product.ID', @Request.IsAuthenticated.ToString().ToLowerInvariant(), 5000);
-        setInterval(updateCounter, 1000);
+        setInterval(updateCounter, 500);
 
         function updateCounter(){
             if (currentPrice[0] < clocks[0].getTime().time){
